@@ -2,15 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('public.home');
-});
+Route::get('/', function () {return view('public.home');})->name('home');
+Route::get('/agreement', function () {return view('public.agreement');})->name('agreement');
 
-Route::get('/login', function () {
-    return view('auth.login');
-});
 
-Route::get('/register', function () {
-    return view('auth.register');
-});
 
