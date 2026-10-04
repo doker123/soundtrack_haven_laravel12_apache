@@ -1,5 +1,9 @@
 <header class="w-full bg-sidebar-bg px-6 py-4 flex items-center justify-between border-b border-gray-800 text-white font-medium select-none shadow-md">
 
+<<<<<<< HEAD
+=======
+    {{-- Логотип --}}
+>>>>>>> 038e6ed9c9af2bc2a8870ec57e3c792290d0c498
     <div class="shrink-0">
         <a href="/" class="block text-5xl text-[#F5F5F7] hover:text-[#6d5898] active:text-[#5825b5] transition-colors tracking-wider">
             SH
@@ -27,6 +31,11 @@
             </div>
         </div>
         @endcan
+<<<<<<< HEAD
+=======
+
+        {{-- Текстовые ссылки для авторизованных --}}
+>>>>>>> 038e6ed9c9af2bc2a8870ec57e3c792290d0c498
         @auth
         <a href="#" class="hover:text-[#6d5898] active:text-[#5825b5] transition-colors uppercase tracking-wider">
             Избранное
@@ -39,27 +48,51 @@
         </a>
         @endauth
 
+<<<<<<< HEAD
     </nav>
 
+=======
+        {{-- Ссылка входа для гостей --}}
+
+    </nav>
+
+    {{-- Профиль и Выход (В правом углу) --}}
+>>>>>>> 038e6ed9c9af2bc2a8870ec57e3c792290d0c498
     <div class="shrink-0 flex items-center gap-4">
         @auth
             <a href="#" class="hover:underline text-sm tracking-wide block max-w-30 truncate">
                 {{ Auth::user()->name }}
             </a>
 
+<<<<<<< HEAD
             <form action="{{ route('logout') }}" method="POST" class="inline">
+=======
+            <form action="#" method="POST" class="inline">
+>>>>>>> 038e6ed9c9af2bc2a8870ec57e3c792290d0c498
                 @csrf
                 <button type="submit" class="text-xs text-red-400 hover:text-red-500 underline transition-colors cursor-pointer">
                     Выйти
                 </button>
             </form>
         @else
+<<<<<<< HEAD
             <a href="{{ route('login') }}" class="text-sm hover:underline tracking-wide block">
                 Войти
             </a>
             <a href="{{ route('register') }}" class="text-sm hover:underline tracking-wide block">
                 Регистрация
             </a>
+=======
+            <a href="#" class="text-sm hover:underline tracking-wide block">
+                Войти
+            </a>
+            <a href="#" class="text-sm hover:underline tracking-wide block">
+                Регистрация
+            </a>
+            <a href="#" class="text-sm text-red-500 hover:underline tracking-wide block">
+                Админ
+            </a>
+>>>>>>> 038e6ed9c9af2bc2a8870ec57e3c792290d0c498
         @endif
     </div>
 </header>
