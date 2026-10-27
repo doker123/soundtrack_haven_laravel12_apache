@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('playlists_tracks', function (Blueprint $table) {
+        Schema::create('playlist_tracks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('playlist_id')->constrained()->cascadeOnDelete();
             $table->foreignId('track_id')->constrained()->cascadeOnDelete();
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('playlists_tracks');
+        Schema::dropIfExists('playlist_tracks');
     }
 };

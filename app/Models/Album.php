@@ -5,17 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Builder;
 
 class Album extends Model
 {
     protected $fillable = [
-        'author_i',
-        'status_i',
-        'titl',
-        'cover_pat',
-        'release_dat',
-        'descriptio',
-        'positio',
+        'author_id',
+        'status_id',
+        'title',
+        'cover_path',
+        'release_date',
+        'description',
+        'position',
     ];
 
     protected $casts = [
@@ -32,10 +33,14 @@ class Album extends Model
     {
         return $this->belongsTo(Status::class);
     }
-    
+
     public function tracks(): HasMany
     {
         return $this->hasMany(Track::class);
     }
-    
+    public function scopePublished(Builder $query): Builder
+    {
+        return $query->whereHas('status', fn ($q) => $q->where('name', 'published'));
+    }
+
 }

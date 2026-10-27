@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Builder;
 
 class Playlist extends Model
 {
@@ -37,5 +38,10 @@ class Playlist extends Model
         return $this->belongsToMany(Track::class, 'playlist_tracks')
             ->withPivot('position')
             ->orderByPivot('position');
+    }
+    
+    public function scopePublic(Builder $query): Builder
+    {
+        return $query->where('is_public', true);
     }
 }

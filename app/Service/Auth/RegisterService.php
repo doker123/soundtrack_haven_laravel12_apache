@@ -15,6 +15,7 @@ class RegisterService
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
+                'role_id' => DB::table('roles')->where('name', 'user')->value('id'),
             ]);
             event(new Registered($user));
             request()->session()->regenerate();
