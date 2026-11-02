@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Catalog;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Track;
@@ -12,8 +12,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use FFMpeg\FFProbe;
 use Illuminate\Support\Facades\Log;
-use App\Http\Requests\Catalog\StoreTrackRequest;
-use App\Http\Requests\Catalog\UpdateTrackRequest;
+use App\Http\Requests\Admin\StoreTrackRequest;
+use App\Http\Requests\Admin\UpdateTrackRequest;
 
 class TrackController extends Controller
 {
@@ -24,7 +24,7 @@ class TrackController extends Controller
     {
         $tracks = Track::query()->latest()->get();
 
-        return view("tracks.index", compact("tracks"));
+        return view("admin.tracks.index", compact("tracks"));
     }
 
     /**
@@ -36,7 +36,7 @@ class TrackController extends Controller
         $albums = Album::all();
         $statuses = Status::all();
 
-        return view("tracks.create", compact("authors", "albums", "statuses"));
+        return view("admin.tracks.create", compact("authors", "albums", "statuses"));
     }
 
     /**
@@ -48,9 +48,7 @@ class TrackController extends Controller
 
         $cover = $request->file("cover");
         $file = $request->file("audio");
-
-        $data["cover"] = $request->$file("covers", "local");
-
+        
         $data["storage_key"] = $file->store("tracks", "local");
         $data["mime_type"] = $file->getMimeType();
         $data["file_size"] = $file->getSize();
@@ -59,7 +57,7 @@ class TrackController extends Controller
         $track = Track::create($data);
 
         return redirect()
-            ->route("tracks.show", $track)
+            ->route("admin.tracks.show", $track)
             ->with("success", "Трек создан");
     }
 
@@ -70,7 +68,7 @@ class TrackController extends Controller
     {
         $track->load(["author", "album.author", "status"]);
 
-        return view("tracks.show", compact("track"));
+        return view("admin.tracks.show", compact("track"));
     }
 
     /**
@@ -83,7 +81,7 @@ class TrackController extends Controller
         $statuses = Status::all();
 
         return view(
-            "tracks.edit",
+            "admin.tracks.edit",
             compact("track", "albums", "authors", "statuses"),
         );
     }
@@ -117,14 +115,14 @@ class TrackController extends Controller
         $track->update($data);
 
         return redirect()
-            ->route("tracks.show", $track)
+            ->route("admin.tracks.show", $track)
             ->with("success", "Трек изменён");
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Track $track)
+    public function destroy(Track $track): RedirectResponse
     {
         if ($track->storage_key) {
             Storage::disk("local")->delete($track->storage_key);
@@ -132,7 +130,7 @@ class TrackController extends Controller
 
         $track->delete();
         return redirect()
-            ->route("tracks.index")
+            ->route("admin.tracks.index")
             ->with("success", "Трек удален!");
     }
     private function resolveDurationMs(string $storageKey): ?int

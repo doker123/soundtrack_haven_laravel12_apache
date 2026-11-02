@@ -7,26 +7,25 @@
         </a>
     </div>
 
-    {{-- Горизонтальная навигация --}}
     <nav class="flex items-center gap-8 relative text-base">
 
-        {{-- Админское выпадающее меню (Буквенная кнопка) --}}
         @can('admin')
-        <div class="relative">
-            <button id="adminDropdownBtn" type="button" class="flex items-center gap-1 hover:text-[#6d5898] active:text-[#5825b5] transition-colors focus:outline-none uppercase tracking-wider font-semibold text-red-400 select-none">
-                <span>Админ</span>
-                {{-- Стрелочка теперь указывает вниз --}}
-                <svg id="adminDropdownArrow" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                </svg>
-            </button>
+            <div class="relative">
 
-            {{-- Всплывающий список (Открывается ВНИЗ: left-0 mt-2) --}}
-            <div id="adminDropdownMenu" class="absolute left-0 mt-2 w-48 bg-sidebar-bg border border-gray-700 rounded-2xl shadow-xl z-50 p-2 flex-col gap-1 hidden">
-                <a href="#" class="p-2.5 rounded-xl hover:bg-sidebar-hover transition-colors text-sm block text-left">Пользователи</a>
-                <a href="#" class="p-2.5 rounded-xl hover:bg-sidebar-hover transition-colors text-sm block text-left">Настройки сайта</a>
+                <button id="admin-btn" type="button" class="flex items-center gap-1 hover:text-[#6d5898] active:text-[#5825b5] transition-colors focus:outline-none uppercase tracking-wider font-semibold text-red-400 select-none">
+                    <span>Админ</span>
+
+                    <svg class="dropdown-arrow w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+
+                <div id="admin-menu" class="dropdown-menu absolute left-0 mt-2 w-48 bg-sidebar-bg border border-none rounded-2xl shadow-xl z-50 p-2 flex-col gap-1 hidden">
+                    <a href="{{route('admin.authors.index')}}" class="p-2.5 rounded-xl hover:bg-sidebar-hover transition-colors text-sm block text-left">Авторы</a>
+                    <a href="{{route('admin.tracks.index')}}" class="p-2.5 rounded-xl hover:bg-sidebar-hover transition-colors text-sm block text-left">Треки</a>
+                    <a href="{{route('admin.albums.index')}}" class="p-2.5 rounded-xl hover:bg-sidebar-hover transition-colors text-sm block text-left">Альбомы</a>
+                </div>
             </div>
-        </div>
         @endcan
 
         @auth
@@ -40,9 +39,6 @@
             Опции
         </a>
         @endauth
-
-        {{-- Ссылка входа для гостей --}}
-
     </nav>
 
     {{-- Профиль и Выход (В правом углу) --}}
@@ -64,9 +60,6 @@
             </a>
             <a href="{{ route('register') }}" class="text-sm hover:underline tracking-wide block">
                 Регистрация
-            </a>
-            <a href="#" class="text-sm text-red-500 hover:underline tracking-wide block">
-                Админ
             </a>
         @endif
     </div>

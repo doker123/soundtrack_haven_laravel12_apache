@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Storage;
 
 class Album extends Model
 {
@@ -38,9 +39,18 @@ class Album extends Model
     {
         return $this->hasMany(Track::class);
     }
+    
     public function scopePublished(Builder $query): Builder
     {
         return $query->whereHas('status', fn ($q) => $q->where('name', 'published'));
+    }
+    
+    public function getCoverUrlAttribute(): string
+    {
+        if ($this->cover_path && Storage::disk('public')->exists($this->cover_path)) {
+            return Storage::url($this->cover_path);
+        }
+        return asset('img/default-cover.png');
     }
 
 }

@@ -1,8 +1,8 @@
 <?php
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Catalog\AuthorController;
-use App\Http\Controllers\Catalog\TrackController;
-use App\Http\Controllers\Catalog\AlbumController;
+use App\Http\Controllers\Admin\AuthorController;
+use App\Http\Controllers\Admin\TrackController;
+use App\Http\Controllers\Admin\AlbumController;
 
 Route::get('/', function () {
     return view('public.home');
@@ -13,6 +13,11 @@ Route::get('/agreement', function () {
 })->name('agreement');
 
 
-Route::resource('tracks', TrackController::class)->only(['index', 'show']);
-Route::resource('authors', AuthorController::class)->only(['index', 'show']);
-Route::resource('albums', AlbumController::class)->only(['index', 'show']);
+Route::prefix('admin')
+    ->name('admin.')
+    ->middleware(['auth', 'admin'])
+    ->group(function () {
+        Route::resource('tracks', TrackController::class);
+        Route::resource('authors', AuthorController::class);
+        Route::resource('albums', AlbumController::class);
+});

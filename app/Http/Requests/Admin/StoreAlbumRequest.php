@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Catalog;
+namespace App\Http\Requests\Admin;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
@@ -24,13 +24,13 @@ class StoreAlbumRequest extends FormRequest
     public function rules(): array
     {
         return [
-                'author_id'    => 'required|integer|exists:authors,id',
-                'status_id'    => 'required|integer|exists:statuses,id',
-                'title'        => 'required|string|max:255',
-                'cover_path'   => 'nullable|image|max:3048',
-                'release_date' => 'nullable|date',
-                'description'  => 'nullable|string',
-                'position'     => 'nullable|integer|min:0',
+                'author_id'    => ['required','integer','exists:authors,id'],
+                'status_id'    => ['required','integer', 'exists:statuses,id'],
+                'title'        => ['required', 'string', 'max:255'],
+                'cover_path'   => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:3072'],
+                'release_date' => ['nullable', 'date'],
+                'description'  => ['nullable', 'string'],
+                'position'     => ['nullable','integer','min:0'],
         ];
     }
 

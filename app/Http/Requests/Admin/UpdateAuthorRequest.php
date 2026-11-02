@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Catalog;
+namespace App\Http\Requests\Admin;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
@@ -23,7 +23,8 @@ class UpdateAuthorRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=> ['requared', 'string', 'max:255'],
+            'name'=> ['required', 'string', 'max:255'],
+            'image'=>['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
             'bio'=> ['nullable', 'string', 'max:1000']
         ];
     }

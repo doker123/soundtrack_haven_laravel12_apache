@@ -32,7 +32,7 @@ class Ban extends Model
 
     public function isActive(): bool 
     {
-        return $this->expires_at === null || $this->epires_at->isFuture();
+        return $this->expires_at === null || $this->expires_at->isFuture();
     }
     
 }

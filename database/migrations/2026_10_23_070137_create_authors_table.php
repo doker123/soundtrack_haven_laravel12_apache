@@ -14,10 +14,7 @@ return new class extends Migration
         Schema::create('authors', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('avatar_id')       // ← вместо string('avatar_path')
-                            ->nullable()
-                            ->constrained()
-                            ->nullOnDelete();
+            $table->string('image')->nullable();
             $table->text('bio')->nullable();
             $table->timestamps();
         });

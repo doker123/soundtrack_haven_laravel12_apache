@@ -10,7 +10,9 @@
 </head>
 <body class="bg-main-bg text-slate-100 antialised font-main">
     @include('modules.header')
-    @yield('content')
+    <main>
+        @yield('content')
+    </main>
     @include('modules.footer')
 </body>
 </html>
