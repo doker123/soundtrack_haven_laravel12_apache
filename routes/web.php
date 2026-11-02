@@ -3,6 +3,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AuthorController;
 use App\Http\Controllers\Admin\TrackController;
 use App\Http\Controllers\Admin\AlbumController;
+use App\Http\Controllers\Admin\UserController;
 
 Route::get('/', function () {
     return view('public.home');
@@ -20,4 +21,5 @@ Route::prefix('admin')
         Route::resource('tracks', TrackController::class);
         Route::resource('authors', AuthorController::class);
         Route::resource('albums', AlbumController::class);
+        Route::resource('users', UserController::class)->only(['index', 'show', 'update', 'destroy']);
 });

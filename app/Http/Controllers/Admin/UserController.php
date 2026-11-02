@@ -51,7 +51,7 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function updateRole(Request $request, User $user)
+    public function update(Request $request, User $user)
     {
         $validated = $request->validate([
             "role_id" => ["required", "exists:roles,id"],
