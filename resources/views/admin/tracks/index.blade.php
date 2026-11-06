@@ -14,7 +14,7 @@
             <h1 class="text-3xl font-extrabold text-white">Все треки</h1>
         </div>
 
-        <a href="{{ route('admin.tracks.create') }}" 
+        <a href="{{ route('admin.tracks.create') }}"
            class="bg-[#6d5898] hover:bg-[#5825b5] text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-all shadow-lg flex items-center gap-2">
             + Загрузить трек
         </a>
@@ -74,7 +74,7 @@
                         <a href="{{ route('admin.tracks.edit', $track) }}" class="text-xs text-yellow-400 hover:text-yellow-300 hover:underline">
                             Изменить
                         </a>
-                        <form action="{{ route('admin.tracks.destroy', $track) }}" method="POST" onsubmit="return confirm('Удалить трек?');">
+                        <form action="{{ route('admin.tracks.destroy', $track) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="text-xs text-red-400 hover:text-red-300 hover:underline cursor-pointer">
@@ -88,6 +88,10 @@
                     Треков пока нет.
                 </div>
             @endforelse
+        </div>
+        {{-- Пагинация --}}
+        <div class="mt-6">
+            {{ $tracks->links() }}
         </div>
     </div>
 </div>

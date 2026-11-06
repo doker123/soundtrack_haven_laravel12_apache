@@ -15,7 +15,7 @@
             <h1 class="text-3xl font-extrabold text-white">Управление альбомами</h1>
         </div>
 
-        <a href="{{ route('admin.albums.create') }}" 
+        <a href="{{ route('admin.albums.create') }}"
            class="bg-[#6d5898] hover:bg-[#5825b5] text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-all shadow-lg flex items-center gap-2">
             + Добавить альбом
         </a>
@@ -81,13 +81,13 @@
                     {{-- Кнопки действий --}}
                     <div class="col-span-1 flex items-center justify-end gap-2">
                         <a href="{{ route('admin.albums.edit', $item) }}" class="text-xs text-yellow-400 hover:text-yellow-300 transition-colors p-1.5 hover:bg-yellow-400/10 rounded-lg" title="Редактировать">
-                            ✏️
+                            Изменить
                         </a>
                         <form action="{{ route('admin.albums.destroy', $item) }}" method="POST" onsubmit="return confirm('Удалить альбом?');">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="text-xs text-red-400 hover:text-red-300 transition-colors p-1.5 hover:bg-red-400/10 rounded-lg cursor-pointer" title="Удалить">
-                                🗑️
+                                Удалить
                             </button>
                         </form>
                     </div>
@@ -97,6 +97,10 @@
                     Альбомов пока нет.
                 </div>
             @endforelse
+        </div>
+        {{-- Пагинация --}}
+        <div class="mt-6">
+            {{ $album->links() }}
         </div>
     </div>
 </div>

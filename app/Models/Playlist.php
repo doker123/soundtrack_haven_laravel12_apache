@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Storage;
 
 class Playlist extends Model
 {
@@ -18,7 +19,7 @@ class Playlist extends Model
     ];
 
     protected $casts = [
-        'is_public' => 'boolean',   // вот зачем был cast из прошлого урока
+        'is_public' => 'boolean',
     ];
 
     public function user(): BelongsTo
@@ -43,5 +44,13 @@ class Playlist extends Model
     public function scopePublic(Builder $query): Builder
     {
         return $query->where('is_public', true);
+    }
+
+    public function getCoverUrlAttribute(): string
+    {
+        if ($this->cover_path && Storage::disk('public')->exists($this->cover_path)) {
+            return Storage::disk('public')->url($this->cover_path);
+        }
+        return asset('images/default-cover.png');
     }
 }

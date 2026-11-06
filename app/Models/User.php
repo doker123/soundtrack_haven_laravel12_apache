@@ -75,14 +75,6 @@ class User extends Authenticatable
     }
 
     /**
-     * Баны, выданные этим пользователем (как модератором).
-    */
-    public function issuedBans(): HasMany
-    {
-        return $this->hasMany(Ban::class, 'banned_by_id');
-    }
-
-    /**
      * Проверка роли по имени, например: $user->hasRole('admin').
      */
     public function hasRole(string $name): bool
@@ -105,5 +97,24 @@ class User extends Authenticatable
     {
         return $this->hasMany(ListeningHistory::class)->latest('played_at');
     }
+    
+    public function hasActiveBan(): bool
+    {
+        return $this->bans()->active()->exists();
+    }
 
+    public function isBanned(): bool
+    {
+        return $this->hasActiveBan();
+    }
+
+    public function activeBan(): ?Ban
+    {
+        return $this->bans()->active()->latest("id")->first();
+    }
+
+    public function playlists():HasMany
+    {
+        return $this->hasMany(Playlist::class)->latest();
+    }
 }

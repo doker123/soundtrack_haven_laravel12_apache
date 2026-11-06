@@ -14,7 +14,7 @@
             <h1 class="text-3xl font-extrabold text-white">Композиторы и авторы</h1>
         </div>
 
-        <a href="{{ route('admin.authors.create') }}" 
+        <a href="{{ route('admin.authors.create') }}"
            class="bg-[#6d5898] hover:bg-[#5825b5] text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-all shadow-lg flex items-center gap-2">
             + Добавить автора
         </a>
@@ -68,7 +68,7 @@
                         <a href="{{ route('admin.authors.edit', $author) }}" class="text-xs text-yellow-400 hover:text-yellow-300 hover:underline">
                             Изменить
                         </a>
-                        <form action="{{ route('admin.authors.destroy', $author) }}" method="POST" onsubmit="return confirm('Удалить автора?');">
+                        <form action="{{ route('admin.authors.destroy', $author) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="text-xs text-red-400 hover:text-red-300 hover:underline cursor-pointer">
@@ -82,6 +82,9 @@
                     Авторов пока нет.
                 </div>
             @endforelse
+        </div>
+        <div class="mt-6">
+            {{ $authors->links() }}
         </div>
     </div>
 </div>

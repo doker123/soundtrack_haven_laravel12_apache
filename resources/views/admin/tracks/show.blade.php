@@ -12,7 +12,7 @@
             <a href="{{ route('admin.tracks.edit', $track) }}" class="text-xs bg-yellow-500/10 text-yellow-400 hover:bg-yellow-500/20 px-4 py-2 rounded-xl border border-yellow-500/30 font-medium">
                 Редактировать
             </a>
-            <form action="{{ route('admin.tracks.destroy', $track) }}" method="POST" onsubmit="return confirm('Удалить этот трек?');">
+            <form action="{{ route('admin.tracks.destroy', $track) }}" method="POST">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="text-xs bg-red-500/10 text-red-400 hover:bg-red-500/20 px-4 py-2 rounded-xl border border-red-500/30 font-medium cursor-pointer">

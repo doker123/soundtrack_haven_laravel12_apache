@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Role;
+use App\Models\Ban;
+use App\Http\Requests\Admin\BanUserRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -15,7 +18,11 @@ class UserController extends Controller
      */
     public function index(Request $request): View
     {
-        $query = User::with(["role", "bans"]);
+        $query = User::with([
+            "role",
+            "avatar",
+            "bans" => fn($q) => $q->active(),
+        ]);
         // Поиск по имени или email
         if ($search = $request->input("search")) {
             $query->where(function ($q) use ($search) {
@@ -42,9 +49,11 @@ class UserController extends Controller
         $user->load([
             "role",
             "avatar",
-            "favoriteTracks",
-            "listeningHistory.track",
+            "bans.bannedBy",
+            "favoriteTracks.author",
+            "listeningHistory.track.author",
         ]);
+        $roles = Role::all();
 
         return view("admin.users.show", compact("user"));
     }
@@ -56,10 +65,10 @@ class UserController extends Controller
         $validated = $request->validate([
             "role_id" => ["required", "exists:roles,id"],
         ]);
-        // Защита: нельзя снять роль с самого себя
+        
         if (
-            $user->id === auth()->id() &&
-            $user->role?->name === "admin" &&
+            $user->is($request->user()) &&
+            $user->hasRole("admin") &&
             $validated["role_id"] != $user->role_id
         ) {
             return back()->with(
@@ -71,7 +80,7 @@ class UserController extends Controller
         return back()->with(
             "success",
             "Роль пользователя {$user->name} обновлена.",
-        );
+        );   
     }
 
     /**
@@ -88,5 +97,39 @@ class UserController extends Controller
         return redirect()
             ->route("admin.users.index")
             ->with("success", "Пользователь удален.");
+    }
+
+    public function ban(BanUserRequest $request, User $user)
+    {
+        if ($user->is($request->user())) {
+            return back()->with("error", "Нельзя забанить самого себя.");
+        }
+
+        if ($user->hasRole("admin")) {
+            return back()->with("error", "Нельзя забанить администратора.");
+        }
+
+        if ($user->isBanned()) {
+            return back()->with("error", "Пользователь уже забанен.");
+        }
+        $user->bans()->create([
+            "banned_by_id" => $request->user()->id,
+            "reason" => $request->validated("reason"),
+            "expires_at" => $request->validated("expires_at") ?? null,
+        ]);
+        return back()->with("success", "Пользователь {$user->name} забанен.");
+    }
+
+    public function unban(Request $request, User $user)
+    {
+        $activeBan = $user->activeBan();
+        
+        if (!$activeBan) {
+            return back()->with("error", "У пользователя нет активного бана.");
+        }
+
+        $activeBan->update(["expires_at" => now()]);
+        
+        return back()->with("success", "Бан пользователя {$user->name} снят.");
     }
 }

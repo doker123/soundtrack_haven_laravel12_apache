@@ -19,7 +19,9 @@ class AlbumController extends Controller
      */
     public function index(): View
     {
-        $album = Album::query()->latest()->get();
+        $album = Album::with(["author", "status", "tracks"])
+            ->latest()
+            ->paginate(12);
 
         return view("admin.albums.index", compact("album"));
     }
@@ -70,7 +72,10 @@ class AlbumController extends Controller
     {
         $authors = Author::all();
         $statuses = Status::all();
-        return view("admin.albums.edit", compact("album", "authors", "statuses"));
+        return view(
+            "admin.albums.edit",
+            compact("album", "authors", "statuses"),
+        );
     }
 
     /**

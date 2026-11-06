@@ -24,6 +24,7 @@
                     <a href="{{route('admin.authors.index')}}" class="p-2.5 rounded-xl hover:bg-sidebar-hover transition-colors text-sm block text-left">Авторы</a>
                     <a href="{{route('admin.tracks.index')}}" class="p-2.5 rounded-xl hover:bg-sidebar-hover transition-colors text-sm block text-left">Треки</a>
                     <a href="{{route('admin.albums.index')}}" class="p-2.5 rounded-xl hover:bg-sidebar-hover transition-colors text-sm block text-left">Альбомы</a>
+                    <a href="{{route('admin.users.index')}}" class="p-2.5 rounded-xl hover:bg-sidebar-hover transition-colors text-sm block text-left">Пользаватели</a>
                 </div>
             </div>
         @endcan

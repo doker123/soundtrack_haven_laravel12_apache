@@ -17,7 +17,9 @@ class AuthorController extends Controller
      */
     public function index(): View
     {
-        $authors = Author::query()->latest()->get();
+        $authors = Author::withCount(["albums", "tracks"])
+            ->latest()
+            ->paginate(15);
 
         return view("admin.authors.index", compact("authors"));
     }
@@ -38,7 +40,9 @@ class AuthorController extends Controller
         $data = $request->validated();
 
         if ($request->hasFile("image")) {
-            $data["image"] = $request->file("image")->store("authors", "public");
+            $data["image"] = $request
+                ->file("image")
+                ->store("authors", "public");
         }
 
         $author = Author::create($data);
@@ -84,7 +88,9 @@ class AuthorController extends Controller
             ) {
                 Storage::disk("public")->delete($author->image);
             }
-            $data["image"] = $request->file("image")->store("authors", "public");
+            $data["image"] = $request
+                ->file("image")
+                ->store("authors", "public");
         }
         $author->update($data);
 

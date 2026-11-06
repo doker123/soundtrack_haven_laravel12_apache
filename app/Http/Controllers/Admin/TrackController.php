@@ -22,7 +22,9 @@ class TrackController extends Controller
      */
     public function index(): View
     {
-        $tracks = Track::query()->latest()->get();
+        $tracks = Track::with(["author", "album", "status"])
+            ->latest()
+            ->paginate(20);
 
         return view("admin.tracks.index", compact("tracks"));
     }
@@ -36,7 +38,10 @@ class TrackController extends Controller
         $albums = Album::all();
         $statuses = Status::all();
 
-        return view("admin.tracks.create", compact("authors", "albums", "statuses"));
+        return view(
+            "admin.tracks.create",
+            compact("authors", "albums", "statuses"),
+        );
     }
 
     /**
@@ -48,7 +53,7 @@ class TrackController extends Controller
 
         $cover = $request->file("cover");
         $file = $request->file("audio");
-        
+
         $data["storage_key"] = $file->store("tracks", "local");
         $data["mime_type"] = $file->getMimeType();
         $data["file_size"] = $file->getSize();
@@ -96,7 +101,6 @@ class TrackController extends Controller
         $data = $request->validated();
 
         if ($file = $request->file("audio")) {
-
             if ($track->storage_key) {
                 Storage::disk("local")->delete($track->storage_key);
             }
