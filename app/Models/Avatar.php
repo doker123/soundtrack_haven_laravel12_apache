@@ -28,9 +28,4 @@ class Avatar extends Model
     {
         return $this->hasMany(Author::class);
     }
-    
-    public function getUrlAttribute(): string
-    {
-        return Storage::disk($this->disk)->url($this->path);
-    }
 }

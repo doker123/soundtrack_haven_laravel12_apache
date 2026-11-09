@@ -36,7 +36,7 @@
         <a href="#" class="hover:text-[#6d5898] active:text-[#5825b5] transition-colors uppercase tracking-wider">
             Поиск
         </a>
-        <a href="#" class="hover:text-[#6d5898] active:text-[#5825b5] transition-colors uppercase tracking-wider">
+        <a href="{{route('public.settings.edit')}}" class="hover:text-[#6d5898] active:text-[#5825b5] transition-colors uppercase tracking-wider">
             Опции
         </a>
         @endauth
@@ -49,7 +49,7 @@
                 {{ Auth::user()->name }}
             </a>
 
-            <form action="{{ route('logout') }}" method="POST" class="inline">
+            <form action="{{ route('public.logout') }}" method="POST" class="inline">
                 @csrf
                 <button type="submit" class="text-xs text-red-400 hover:text-red-500 underline transition-colors cursor-pointer">
                     Выйти

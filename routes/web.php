@@ -7,39 +7,69 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Public\PlaylistController;
+use App\Http\Controllers\Public\HomeController;
+use App\Http\Controllers\Public\SettingsController;
 
-// Маршруты для гостей (доступны только неавторизованным)
-Route::middleware('guest')->group(function () {
-    Route::get('/login', [LoginController::class, 'show'])->name('login');
-    Route::post('/login', [LoginController::class, 'store']);
+// Общедоступные страницы
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::view('/agreement', 'public.agreement')->name('agreement');
+// Авторизация в системе
+Route::middleware("guest")->group(function () {
+    Route::get("/login", [LoginController::class, "show"])->name("login");
+    Route::post("/login", [LoginController::class, "store"]);
 
-    Route::get('/register', [RegisterController::class, 'show'])->name('register');
-    Route::post('/register', [RegisterController::class, 'store']);
+    Route::get("/register", [RegisterController::class, "show"])->name(
+        "register",
+    );
+    Route::post("/register", [RegisterController::class, "store"]);
 });
-
-Route::middleware('auth')->group(function () {
-    Route::post('/logout', [LogoutController::class, 'destroy'])->name('logout');
-});
-
-
-
-Route::get('/', function () {
-    return view('public.home');
-})->name('home');
-
-Route::get('/agreement', function () {
-    return view('public.agreement');
-})->name('agreement');
-
-
-Route::prefix('admin')
-    ->name('admin.')
-    ->middleware(['auth', 'admin'])
+// Возможности пользователя в системе
+Route::prefix("public")
+    ->name("public.")
+    ->middleware("auth")
     ->group(function () {
-        Route::resource('tracks', TrackController::class);
-        Route::resource('authors', AuthorController::class);
-        Route::resource('albums', AlbumController::class);
-        Route::resource('users', UserController::class)->only(['index', 'show', 'update', 'destroy']);
-        Route::post('users/{user}/ban', [UserController::class, 'ban'])->name('users.ban');
-        Route::post('users/{user}/unban', [UserController::class, 'unban'])->name('users.unban');
-});
+        Route::resource("playlists", PlaylistController::class);
+        Route::post("playlists/{playlist}/tracks", [
+            PlaylistController::class,
+            "addTrack",
+        ])->name("playlists.tracks.add");
+        Route::delete("playlists/{playlist}/tracks/{track}", [
+            PlaylistController::class,
+            "removeTrack",
+        ])->name("playlists.tracks.remove");
+        Route::post("/logout", [LogoutController::class, "destroy"])->name(
+            "logout",
+        );
+
+        Route::get('/settings', [SettingsController::class, 'edit'])->name('settings.edit');
+
+        // Отдельные маршруты обновлений
+        Route::patch('/settings/name', [SettingsController::class, 'updateName'])->name('settings.name.update');
+        Route::patch('/settings/email', [SettingsController::class, 'updateEmail'])->name('settings.email.update');
+        Route::post('/settings/avatar', [SettingsController::class, 'updateAvatar'])->name('settings.avatar.update');
+        Route::delete('/settings/avatar', [SettingsController::class, 'deleteAvatar'])->name('settings.avatar.delete');
+        Route::patch('/settings/password', [SettingsController::class, 'updatePassword'])->name('settings.password.update');
+    });
+// Админ панель системы
+Route::prefix("admin")
+    ->name("admin.")
+    ->middleware(["auth", "admin"])
+    ->group(function () {
+        Route::resource("tracks", TrackController::class);
+        Route::resource("authors", AuthorController::class);
+        Route::resource("albums", AlbumController::class);
+        Route::resource("users", UserController::class)->only([
+            "index",
+            "show",
+            "update",
+            "destroy",
+        ]);
+        Route::post("users/{user}/ban", [UserController::class, "ban"])->name(
+            "users.ban",
+        );
+        Route::post("users/{user}/unban", [
+            UserController::class,
+            "unban",
+        ])->name("users.unban");
+    });

@@ -12,7 +12,7 @@ class StorePlaylistRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,7 +23,26 @@ class StorePlaylistRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "title" => ["required", "string", "max:255"],
+            "description" => ["nullable", "string", "max:1000"],
+            "cover" => [
+                "nullable",
+                "image",
+                "mimes:jpeg,png,jpg,webp",
+                "max:3072",
+            ],
+            "is_public" => ["nullable", "boolean"],
+        ];
+    }
+    public function messages(): array
+    {
+        return [
+            "title.required" => "Название обязательно.",
+            "title.string" => "Должно быть строкой.",
+            "title.max" => "Максимум 255 символов.",
+            "description.max" => "Максимум 1000 символов",
+            "cover.max" => "Максимум размер фото 3мб",
+            "cover.mimes"=> "Расшиерние фото должно быть: jpeg,png,jpg,webp",
         ];
     }
 }

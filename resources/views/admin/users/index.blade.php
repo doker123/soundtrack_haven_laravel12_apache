@@ -99,7 +99,7 @@
 
                     {{-- Аватар --}}
                     <div class="col-span-1">
-                        <img src="{{ $user->avatar?->url ?? asset('images/default-avatar.png') }}"
+                        <img src="{{ $user->avatar?->url ?? asset('images/default-avatar.svg') }}"
                              alt="{{ $user->name }}"
                              class="w-10 h-10 object-cover rounded-full
                                     border border-gray-700 bg-gray-900">

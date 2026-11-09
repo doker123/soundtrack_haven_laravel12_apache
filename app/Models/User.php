@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 
 class User extends Authenticatable
 {
@@ -97,7 +98,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(ListeningHistory::class)->latest('played_at');
     }
-    
+
     public function hasActiveBan(): bool
     {
         return $this->bans()->active()->exists();
@@ -116,5 +117,17 @@ class User extends Authenticatable
     public function playlists():HasMany
     {
         return $this->hasMany(Playlist::class)->latest();
+    }
+    public function getAvatar(): string
+    {
+        if (
+            $this->avatar &&
+            $this->avatar->path &&
+            Storage::disk($this->avatar->disk ?? 'public')->exists($this->avatar->path)
+        ) {
+            return $this->avatar->url;
+        }
+
+        return asset('images/default-avatar.svg');
     }
 }

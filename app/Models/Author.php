@@ -18,19 +18,19 @@ class Author extends Model
     {
         return $this->hasMany(Album::class);
     }
-    
+
     public function tracks(): HasMany
     {
         return $this->hasMany(Track::class);
     }
-        
+
     public function getImageUrlAttribute(): string
         {
             if ($this->image && Storage::disk('public')->exists($this->image)) {
                 return Storage::disk('public')->url($this->image);
             }
-            // Дефолтная картинка-заглушка (положите её в public/images/default-avatar.png)
-            return asset('images/default-avatar.png');
+            // Дефолтная картинка-заглушка (положите её в public/images/default-avatar.svg)
+            return asset('images/default-avatar.svg');
         }
 
     public function sizeMb(): float

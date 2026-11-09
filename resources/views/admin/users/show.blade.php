@@ -47,7 +47,7 @@
             {{-- Карточка профиля --}}
             <div class="bg-main-dark border border-gray-800 rounded-3xl p-6 shadow-xl
                         grid grid-cols-[auto_1fr] gap-4 items-center">
-                <img src="{{ $user->avatar?->url ?? asset('images/default-avatar.png') }}"
+                <img src="{{ $user->avatar?->url ?? asset('images/default-avatar.svg') }}"
                      alt="{{ $user->name }}"
                      class="w-16 h-16 rounded-full object-cover border border-gray-700 bg-gray-900">
 
