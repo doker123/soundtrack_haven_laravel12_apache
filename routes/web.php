@@ -10,10 +10,12 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Public\PlaylistController;
 use App\Http\Controllers\Public\HomeController;
 use App\Http\Controllers\Public\SettingsController;
+use App\Http\Controllers\Public\AudioStreamController;
 
 // Общедоступные страницы
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::view('/agreement', 'public.agreement')->name('agreement');
+Route::get("/", [HomeController::class, "index"])->name("home");
+Route::get("/tracks/{track}/stream", [AudioStreamController::class,"stream",])->name("tracks.stream");
+Route::view("/agreement", "public.agreement")->name("agreement");
 // Авторизация в системе
 Route::middleware("guest")->group(function () {
     Route::get("/login", [LoginController::class, "show"])->name("login");
@@ -42,14 +44,35 @@ Route::prefix("public")
             "logout",
         );
 
-        Route::get('/settings', [SettingsController::class, 'edit'])->name('settings.edit');
+        Route::get("/settings", [SettingsController::class, "edit"])->name(
+            "settings.edit",
+        );
 
         // Отдельные маршруты обновлений
-        Route::patch('/settings/name', [SettingsController::class, 'updateName'])->name('settings.name.update');
-        Route::patch('/settings/email', [SettingsController::class, 'updateEmail'])->name('settings.email.update');
-        Route::post('/settings/avatar', [SettingsController::class, 'updateAvatar'])->name('settings.avatar.update');
-        Route::delete('/settings/avatar', [SettingsController::class, 'deleteAvatar'])->name('settings.avatar.delete');
-        Route::patch('/settings/password', [SettingsController::class, 'updatePassword'])->name('settings.password.update');
+        Route::patch("/settings/name", [
+            SettingsController::class,
+            "updateName",
+        ])->name("settings.name.update");
+        Route::patch("/settings/email", [
+            SettingsController::class,
+            "updateEmail",
+        ])->name("settings.email.update");
+        Route::post("/settings/avatar", [
+            SettingsController::class,
+            "updateAvatar",
+        ])->name("settings.avatar.update");
+        Route::delete("/settings/avatar", [
+            SettingsController::class,
+            "deleteAvatar",
+        ])->name("settings.avatar.delete");
+        Route::patch("/settings/password", [
+            SettingsController::class,
+            "updatePassword",
+        ])->name("settings.password.update");
+        Route::post("/tracks/{track}/listen", [
+            AudioStreamController::class,
+            "recordHistory",
+        ])->name("tracks.listen");
     });
 // Админ панель системы
 Route::prefix("admin")

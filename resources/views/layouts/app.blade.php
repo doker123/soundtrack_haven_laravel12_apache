@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title', 'Soundtrack-Haven')</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <link rel="icon" href="{{ asset('img/favicon/favicon.svg') }}">
+    <link rel="icon" href="{{ asset('images/favicon/favicon.svg') }}">
 </head>
 <body class="bg-main-bg text-slate-100 antialised font-main">
     @include('modules.header')
@@ -14,5 +14,7 @@
         @yield('content')
     </main>
     @include('modules.footer')
+
+    @include('modules.player')
 </body>
 </html>
