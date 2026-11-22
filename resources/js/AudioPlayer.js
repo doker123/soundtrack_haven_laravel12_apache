@@ -90,40 +90,32 @@ export default class AudioPlayer {
         }
     }
     loadTrack(trackData) {
-        // Reset previous playback state
         this.audio.pause();
         this.audio.currentTime = 0;
         this.audio.src = '';
 
-
-        if (!trackData?.url) {
-            console.error("Нет URL у трека!", trackData);
-            return;
-        }
         this.show();
         this.fallbackDuration = Number(trackData.duration) || 0;
         this.audio.src = trackData.url;
-        this.audio.load(); // ensure source is loaded
+        this.audio.load();
 
-        // Update UI
         if (this.titleEl) this.titleEl.textContent = `Трек: ${trackData.title}`;
         if (this.artistEl) this.artistEl.textContent = `Автор: ${trackData.author || "Неизвестен"}`;
         if (this.coverEl && trackData.cover) this.coverEl.src = trackData.cover;
         if (this.durationEl && this.fallbackDuration > 0) {
             this.durationEl.textContent = this.formatTime(this.fallbackDuration);
         }
-        // Reset seek slider UI
+
         if (this.seekSlider) {
             this.seekSlider.value = 0;
             this.updateSeekFill(0);
         }
-        // Autoplay when ready (user interaction already occurred)
+
         const tryPlay = () => {
             this.play();
             this.audio.removeEventListener('canplay', tryPlay);
         };
         this.audio.addEventListener('canplay', tryPlay);
-        // Immediate attempt in case metadata already available
         this.play();
     }
     show() {
@@ -289,8 +281,8 @@ export default class AudioPlayer {
     }
     updateSeekFill(percent) {
         if (!this.seekSlider) return;
-        const activeColor = "#8b5cf6"; // violet-500
-        const inactiveColor = "#374151"; // gray-700
+        const activeColor = "#8b5cf6";
+        const inactiveColor = "#374151";
         this.seekSlider.style.background = `linear-gradient(to right, ${activeColor} 0%, ${activeColor} ${percent}%, ${inactiveColor} ${percent}%, ${inactiveColor} 100%)`;
     }
 }
