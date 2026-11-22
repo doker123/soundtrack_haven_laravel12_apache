@@ -7,7 +7,7 @@
 
     {{-- Навигация назад --}}
     <div class="mb-6">
-        <a href="{{ route('playlists.index') }}"
+        <a href="{{ route('public.playlists.index') }}"
            class="inline-flex items-center gap-1.5 text-xs text-gray-400 hover:text-white transition-colors">
             ← Назад к моим плейлистам
         </a>
@@ -16,7 +16,7 @@
 
     {{-- Карточка формы --}}
     <div class="bg-main-dark border border-gray-800 p-8 rounded-3xl shadow-xl">
-        <form action="{{ route('playlists.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+        <form action="{{ route('public.playlists.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
             @csrf
 
             {{-- Название плейлиста --}}
@@ -87,7 +87,7 @@
 
             {{-- Кнопки действий --}}
             <div class="flex items-center justify-end gap-3 pt-4 border-t border-gray-800">
-                <a href="{{ route('playlists.index') }}"
+                <a href="{{ route('public.playlists.index') }}"
                    class="px-5 py-2.5 text-sm text-gray-400 hover:text-white transition-colors">
                     Отмена
                 </a>

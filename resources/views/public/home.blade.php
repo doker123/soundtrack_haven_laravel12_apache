@@ -15,26 +15,28 @@
 
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
             @forelse($latestAlbums as $album)
-                <div class="bg-main-dark border border-gray-800 rounded-2xl p-4 flex flex-col hover:border-violet-500/50 transition-all group shadow-lg">
-                    <div class="overflow-hidden rounded-xl mb-3 aspect-square bg-gray-900 relative">
-                        <img src="{{ $album->cover_url }}" 
-                             alt="{{ $album->title }}" 
-                             class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                <a href="{{route('public.albums.show', $album)}}">
+                    <div class="bg-main-dark border border-gray-800 rounded-2xl p-4 flex flex-col hover:border-violet-500/50 transition-all group shadow-lg">
+                        <div class="overflow-hidden rounded-xl mb-3 aspect-square bg-gray-900 relative">
+                            <img src="{{ $album->cover_url }}"
+                                 alt="{{ $album->title }}"
+                                 class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                        </div>
+
+                        <h3 class="font-bold text-white text-sm truncate" title="{{ $album->title }}">
+                            {{ $album->title }}
+                        </h3>
+
+                        <p class="text-xs text-gray-400 mt-1 truncate">
+                            {{ $album->author?->name ?? 'Неизвестный автор' }}
+                        </p>
+
+                        <div class="mt-auto pt-3 flex items-center justify-between text-[11px] text-gray-500">
+                            <span>{{ $album->release_date?->format('Y') ?? '—' }}</span>
+                            <span>{{ $album->tracks->count() }} треков</span>
+                        </div>
                     </div>
-
-                    <h3 class="font-bold text-white text-sm truncate" title="{{ $album->title }}">
-                        {{ $album->title }}
-                    </h3>
-
-                    <p class="text-xs text-gray-400 mt-1 truncate">
-                        {{ $album->author?->name ?? 'Неизвестный автор' }}
-                    </p>
-
-                    <div class="mt-auto pt-3 flex items-center justify-between text-[11px] text-gray-500">
-                        <span>{{ $album->release_date?->format('Y') ?? '—' }}</span>
-                        <span>{{ $album->tracks->count() }} треков</span>
-                    </div>
-                </div>
+                </a>
             @empty
                 <div class="col-span-full py-12 text-center text-gray-500 bg-main-dark border border-gray-800 rounded-2xl">
                     Альбомов пока нет.
@@ -52,12 +54,17 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             @forelse($featuredTracks as $index => $track)
-                <div class="bg-main-dark border border-gray-800 hover:border-violet-500/40 rounded-2xl p-3 flex items-center justify-between transition-colors group">
+                <div class="bg-main-dark border border-gray-800 hover:border-violet-500/40 rounded-2xl p-3 flex items-center justify-between transition-colors group cursor-pointer"
+                        data-track-id="{{ $track->id }}"
+                        data-track-url="{{ route('tracks.stream', $track) }}"
+                        data-track-title="{{ $track->title }}"
+                        data-track-author="{{ $track->author?->name ?? 'Неизвестный автор' }}"
+                        data-track-cover="{{ $track->album?->cover_url ?? asset('images/default-cover.svg') }}">
                     <div class="flex items-center gap-3.5 min-w-0">
                         {{-- Обложка от альбома --}}
                         <div class="w-12 h-12 rounded-xl overflow-hidden bg-gray-900 shrink-0 border border-gray-700/60">
-                            <img src="{{ $track->album?->cover_url ?? asset('img/default-cover.png') }}" 
-                                 alt="{{ $track->title }}" 
+                            <img src="{{ $track->album?->cover_url ?? asset('images/default-cover.svg') }}"
+                                 alt="{{ $track->title }}"
                                  class="w-full h-full object-cover">
                         </div>
 
@@ -117,21 +124,23 @@
 
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
             @forelse($popularAuthors as $author)
-                <div class="bg-main-dark border border-gray-800 rounded-2xl p-4 flex flex-col items-center text-center hover:border-violet-500/50 transition-all group">
-                    <div class="w-24 h-24 rounded-full overflow-hidden bg-gray-900 mb-3 border-2 border-gray-700 group-hover:border-violet-400 transition-colors shadow-md">
-                        <img src="{{ $author->image_url }}" 
-                             alt="{{ $author->name }}" 
-                             class="w-full h-full object-cover">
+                <a href="{{route('public.authors.show', $author)}}">
+                    <div class="bg-main-dark border border-gray-800 rounded-2xl p-4 flex flex-col items-center text-center hover:border-violet-500/50 transition-all group">
+                        <div class="w-24 h-24 rounded-full overflow-hidden bg-gray-900 mb-3 border-2 border-gray-700 group-hover:border-violet-400 transition-colors shadow-md">
+                            <img src="{{ $author->image_url }}"
+                                 alt="{{ $author->name }}"
+                                 class="w-full h-full object-cover">
+                        </div>
+
+                        <h3 class="font-bold text-white text-sm truncate max-w-full">
+                            {{ $author->name }}
+                        </h3>
+
+                        <p class="text-[11px] text-gray-400 mt-1">
+                            {{ $author->albums_count }} альбомов · {{ $author->tracks_count }} треков
+                        </p>
                     </div>
-
-                    <h3 class="font-bold text-white text-sm truncate max-w-full">
-                        {{ $author->name }}
-                    </h3>
-
-                    <p class="text-[11px] text-gray-400 mt-1">
-                        {{ $author->albums_count }} альбомов · {{ $author->tracks_count }} треков
-                    </p>
-                </div>
+                </a>
             @empty
                 <div class="col-span-full py-10 text-center text-gray-500 bg-main-dark border border-gray-800 rounded-2xl">
                     Авторы пока не добавлены.
@@ -139,36 +148,5 @@
             @endforelse
         </div>
     </section>
-
-    {{-- 4. Публичные плейлисты сообщества --}}
-    @if($publicPlaylists->isNotEmpty())
-        <section class="flex flex-col gap-6">
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-                @foreach($publicPlaylists as $playlist)
-                    <div class="bg-main-dark border border-gray-800 rounded-2xl p-4 flex flex-col hover:border-violet-500/50 transition-all group shadow-lg">
-                        <a href="{{ route('playlists.show', $playlist) }}" class="overflow-hidden rounded-xl mb-3 aspect-square bg-gray-900 block">
-                            <img src="{{ $playlist->cover_url }}" 
-                                 alt="{{ $playlist->title }}" 
-                                 class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                        </a>
-
-                        <h3 class="font-bold text-white text-sm truncate">
-                            <a href="{{ route('playlists.show', $playlist) }}" class="hover:text-violet-300 transition-colors">
-                                {{ $playlist->title }}
-                            </a>
-                        </h3>
-
-                        <p class="text-xs text-gray-400 mt-1 truncate">
-                            {{ $playlist->user?->name ?? 'Пользователь' }}
-                        </p>
-
-                        <div class="mt-auto pt-3 text-[11px] text-gray-500">
-                            {{ $playlist->tracks_count }} треков
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </section>
-    @endif
 </div>
 @endsection

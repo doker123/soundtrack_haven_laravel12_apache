@@ -51,6 +51,6 @@ class Playlist extends Model
         if ($this->cover_path && Storage::disk('public')->exists($this->cover_path)) {
             return Storage::disk('public')->url($this->cover_path);
         }
-        return asset('images/default-cover.png');
+        return asset('images/default-cover.svg');
     }
 }

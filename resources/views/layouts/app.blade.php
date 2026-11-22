@@ -14,7 +14,6 @@
         @yield('content')
     </main>
     @include('modules.footer')
-
     @include('modules.player')
 </body>
 </html>

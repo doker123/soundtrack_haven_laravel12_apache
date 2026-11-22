@@ -50,7 +50,7 @@ class Album extends Model
         if ($this->cover_path && Storage::disk('public')->exists($this->cover_path)) {
             return Storage::url($this->cover_path);
         }
-        return asset('img/default-cover.png');
+        return asset('images/default-cover.svg');
     }
 
 }

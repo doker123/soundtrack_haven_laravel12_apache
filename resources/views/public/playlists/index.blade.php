@@ -10,7 +10,7 @@
             <p class="text-sm text-gray-400 mt-1">Созданные вами подборки музыки</p>
         </div>
 
-        <a href="{{ route('playlists.create') }}"
+        <a href="{{ route('public.playlists.create') }}"
            class="bg-[#6d5898] hover:bg-[#5825b5] text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-all shadow-md flex items-center gap-2">
             + Создать плейлист
         </a>
@@ -25,12 +25,12 @@
     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
         @forelse($playlists as $playlist)
             <div class="bg-main-dark border border-gray-800 rounded-2xl p-4 flex flex-col hover:border-violet-500/50 transition-all group">
-                <a href="{{ route('playlists.show', $playlist) }}" class="overflow-hidden rounded-xl mb-3 block aspect-square bg-gray-900">
+                <a href="{{ route('public.playlists.show', $playlist) }}" class="overflow-hidden rounded-xl mb-3 block aspect-square bg-gray-900">
                     <img src="{{ $playlist->cover_url }}" alt="{{ $playlist->title }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
                 </a>
 
                 <h3 class="font-bold text-white text-base truncate">
-                    <a href="{{ route('playlists.show', $playlist) }}" class="hover:text-violet-300 transition-colors">
+                    <a href="{{ route('public.playlists.show', $playlist) }}" class="hover:text-violet-300 transition-colors">
                         {{ $playlist->title }}
                     </a>
                 </h3>
