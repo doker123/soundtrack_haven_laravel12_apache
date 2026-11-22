@@ -83,7 +83,7 @@
                         <a href="{{ route('admin.albums.edit', $item) }}" class="text-xs text-yellow-400 hover:text-yellow-300 transition-colors p-1.5 hover:bg-yellow-400/10 rounded-lg" title="Редактировать">
                             Изменить
                         </a>
-                        <form action="{{ route('admin.albums.destroy', $item) }}" method="POST" onsubmit="return confirm('Удалить альбом?');">
+                        <form action="{{ route('admin.albums.destroy', $item) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="text-xs text-red-400 hover:text-red-300 transition-colors p-1.5 hover:bg-red-400/10 rounded-lg cursor-pointer" title="Удалить">

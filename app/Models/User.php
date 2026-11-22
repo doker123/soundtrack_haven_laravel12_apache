@@ -76,6 +76,14 @@ class User extends Authenticatable
     }
 
     /**
+     * Апелляции пользователя на разбан
+     */
+    public function banAppeals(): HasMany
+    {
+        return $this->hasMany(BanAppeal::class);
+    }
+
+    /**
      * Проверка роли по имени, например: $user->hasRole('admin').
      */
     public function hasRole(string $name): bool

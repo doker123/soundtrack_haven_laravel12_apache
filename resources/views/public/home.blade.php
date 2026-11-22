@@ -59,7 +59,8 @@
                         data-track-url="{{ route('tracks.stream', $track) }}"
                         data-track-title="{{ $track->title }}"
                         data-track-author="{{ $track->author?->name ?? 'Неизвестный автор' }}"
-                        data-track-cover="{{ $track->album?->cover_url ?? asset('images/default-cover.svg') }}">
+                        data-track-cover="{{ $track->album?->cover_url ?? asset('images/default-cover.svg') }}"
+                        data-track-duration="{{ $track->duration_ms ? (int)($track->duration_ms / 1000) : 0 }}">
                     <div class="flex items-center gap-3.5 min-w-0">
                         {{-- Обложка от альбома --}}
                         <div class="w-12 h-12 rounded-xl overflow-hidden bg-gray-900 shrink-0 border border-gray-700/60">

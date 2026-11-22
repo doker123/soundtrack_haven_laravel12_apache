@@ -63,7 +63,8 @@
                      data-track-url="{{ route('tracks.stream', $track) }}"
                      data-track-title="{{ $track->title }}"
                      data-track-author="{{ $author->name }}"
-                     data-track-cover="{{ $track->album?->cover_url ?? asset('images/default-cover.svg') }}">
+                     data-track-cover="{{ $track->album?->cover_url ?? asset('images/default-cover.svg') }}"
+                     data-track-duration="{{ $track->duration_ms ? (int)($track->duration_ms / 1000) : 0 }}">
 
                     <div class="flex items-center gap-4 min-w-0">
                         <span class="text-gray-500 w-6 text-center font-mono text-sm shrink-0">{{ $index + 1 }}</span>

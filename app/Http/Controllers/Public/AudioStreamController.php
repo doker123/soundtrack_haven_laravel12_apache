@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class AudioStreamController extends Controller
 {
-    public function stream(Track $track): BinaryFileResponse
+    public function stream(Request $request, Track $track): BinaryFileResponse
     {
         if (!$track->status || $track->status->name !== "published") {
             abort(403, "Трек не доступен для прослушивания");
@@ -33,8 +33,8 @@ class AudioStreamController extends Controller
             "Cache-Control" => "no-cache, private",
         ];
 
-        $response = response()->file($fullPath, $headers);
-        BinaryFileResponse::trustXSendfileTypeHeader();
+        $response = new BinaryFileResponse($fullPath, 200, $headers, true, 'inline');
+        $response->prepare($request);
 
         return $response;
     }

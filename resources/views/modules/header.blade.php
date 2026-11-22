@@ -24,7 +24,18 @@
                     <a href="{{route('admin.authors.index')}}" class="p-2.5 rounded-xl hover:bg-sidebar-hover transition-colors text-sm block text-left">Авторы</a>
                     <a href="{{route('admin.tracks.index')}}" class="p-2.5 rounded-xl hover:bg-sidebar-hover transition-colors text-sm block text-left">Треки</a>
                     <a href="{{route('admin.albums.index')}}" class="p-2.5 rounded-xl hover:bg-sidebar-hover transition-colors text-sm block text-left">Альбомы</a>
-                    <a href="{{route('admin.users.index')}}" class="p-2.5 rounded-xl hover:bg-sidebar-hover transition-colors text-sm block text-left">Пользаватели</a>
+                    <a href="{{route('admin.users.index')}}" class="p-2.5 rounded-xl hover:bg-sidebar-hover transition-colors text-sm block text-left">Пользователи</a>
+                    <a href="{{route('admin.appeals.index')}}" class="p-2.5 rounded-xl hover:bg-sidebar-hover transition-colors text-sm block text-left flex items-center justify-between">
+                        <span>Заявки на разбан</span>
+                        @php
+                            $pendingAppealsCount = \App\Models\BanAppeal::where('status', 'pending')->count();
+                        @endphp
+                        @if($pendingAppealsCount > 0)
+                            <span class="px-1.5 py-0.5 text-[10px] font-bold rounded-full bg-red-500 text-white leading-none">
+                                {{ $pendingAppealsCount }}
+                            </span>
+                        @endif
+                    </a>
                 </div>
             </div>
         @endcan

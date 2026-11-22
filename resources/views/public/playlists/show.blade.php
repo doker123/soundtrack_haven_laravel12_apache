@@ -27,7 +27,7 @@
                     <a href="{{ route('playlists.edit', $playlist) }}" class="text-xs bg-yellow-500/10 text-yellow-400 hover:bg-yellow-500/20 px-4 py-2 rounded-xl border border-yellow-500/30">
                         Редактировать
                     </a>
-                    <form action="{{ route('playlists.destroy', $playlist) }}" method="POST" onsubmit="return confirm('Удалить этот плейлист?');">
+                    <form action="{{ route('playlists.destroy', $playlist) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="text-xs bg-red-500/10 text-red-400 hover:bg-red-500/20 px-4 py-2 rounded-xl border border-red-500/30 cursor-pointer">
@@ -43,9 +43,15 @@
     <div class="bg-main-dark border border-gray-800 rounded-3xl overflow-hidden shadow-xl">
         <div class="divide-y divide-gray-800/80">
             @forelse($playlist->tracks as $index => $track)
-                <div class="grid grid-cols-12 gap-4 items-center px-6 py-3.5 hover:bg-main-light/30 transition-colors text-sm">
+                <div class="grid grid-cols-12 gap-4 items-center px-6 py-3.5 hover:bg-main-light/30 transition-colors text-sm cursor-pointer group"
+                     data-track-id="{{ $track->id }}"
+                     data-track-url="{{ route('tracks.stream', $track) }}"
+                     data-track-title="{{ $track->title }}"
+                     data-track-author="{{ $track->author?->name ?? '—' }}"
+                     data-track-cover="{{ $track->album?->cover_url ?? $playlist->cover_url }}"
+                     data-track-duration="{{ $track->duration_ms ? (int)($track->duration_ms / 1000) : 0 }}">
                     <div class="col-span-1 text-gray-500 font-mono text-center">{{ $index + 1 }}</div>
-                    <div class="col-span-5 font-semibold text-white truncate">
+                    <div class="col-span-5 font-semibold text-white truncate group-hover:text-violet-400 transition-colors">
                         {{ $track->title }}
                     </div>
                     <div class="col-span-3 text-gray-400 truncate">{{ $track->author?->name ?? '—' }}</div>
@@ -54,7 +60,7 @@
                     </div>
 
                     @can('update', $playlist)
-                        <div class="col-span-1 text-right">
+                        <div class="col-span-1 text-right" onclick="event.stopPropagation()">
                             <form action="{{ route('playlists.tracks.remove', [$playlist, $track]) }}" method="POST">
                                 @csrf
                                 @method('DELETE')

@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AuthorController;
 use App\Http\Controllers\Admin\TrackController;
 use App\Http\Controllers\Admin\AlbumController as AdminAlbumController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\BanAppealController as AdminBanAppealController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\Public\PlaylistController;
 use App\Http\Controllers\Public\HomeController;
 use App\Http\Controllers\Public\SettingsController;
 use App\Http\Controllers\Public\AudioStreamController;
+use App\Http\Controllers\Public\BanController as PublicBanController;
 use App\Http\Controllers\Public\AlbumController as PublicAlbumController;
 use App\Http\Controllers\Public\AuthorController as PublicAuthorController;
 
@@ -96,6 +98,10 @@ Route::prefix("public")
             AudioStreamController::class,
             "recordHistory",
         ])->name("tracks.listen");
+
+        // Обжалование бана
+        Route::get("banned", [PublicBanController::class, "show"])->name("ban.show");
+        Route::post("banned/appeal", [PublicBanController::class, "appeal"])->name("ban.appeal");
     });
 // Админ панель системы
 Route::prefix("admin")
@@ -118,4 +124,9 @@ Route::prefix("admin")
             UserController::class,
             "unban",
         ])->name("users.unban");
+
+        // Обработка заявок на разбан
+        Route::get("appeals", [AdminBanAppealController::class, "index"])->name("appeals.index");
+        Route::post("appeals/{appeal}/approve", [AdminBanAppealController::class, "approve"])->name("appeals.approve");
+        Route::post("appeals/{appeal}/reject", [AdminBanAppealController::class, "reject"])->name("appeals.reject");
     });

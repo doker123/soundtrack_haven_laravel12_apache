@@ -10,6 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const trackBtn = e.target.closest("[data-track-url]");
         if (!trackBtn) return;
 
+
+
         // Собираем все треки страницы в очередь
         const allTrackEls = Array.from(
             document.querySelectorAll("[data-track-url]"),
@@ -19,10 +21,13 @@ document.addEventListener("DOMContentLoaded", () => {
             title: el.dataset.trackTitle,
             author: el.dataset.trackAuthor,
             cover: el.dataset.trackCover,
+            duration: el.dataset.trackDuration,
             url: el.dataset.trackUrl,
         }));
 
         player.currentIndex = allTrackEls.indexOf(trackBtn);
+
+
         if (player.currentIndex !== -1) {
             player.loadTrack(player.queue[player.currentIndex]);
         }
@@ -47,6 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 title: el.dataset.trackTitle,
                 author: el.dataset.trackAuthor,
                 cover: el.dataset.trackCover,
+                duration: el.dataset.trackDuration,
                 url: el.dataset.trackUrl,
             }));
 
@@ -65,6 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 title: el.dataset.trackTitle,
                 author: el.dataset.trackAuthor,
                 cover: el.dataset.trackCover,
+                duration: el.dataset.trackDuration,
                 url: el.dataset.trackUrl,
             }));
             player.currentIndex = 0;
