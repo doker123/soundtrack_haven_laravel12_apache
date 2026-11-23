@@ -59,7 +59,7 @@ class PlaylistController extends Controller
             ]);
 
         return redirect()
-            ->route("pblic.playlists.show", $playlist)
+            ->route("public.playlists.show", $playlist)
             ->with("success", "Плейлист создан!");
     }
 

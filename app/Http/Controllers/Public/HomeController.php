@@ -34,9 +34,9 @@ class HomeController extends Controller
         $featuredTracks = Track::with(["author", "album"])
             ->published()
             ->latest()
-            ->take(9)
+            ->take(10)
             ->get();
-            
+
         return view(
             "public.home",
             compact(

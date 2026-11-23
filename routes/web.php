@@ -15,6 +15,8 @@ use App\Http\Controllers\Public\AudioStreamController;
 use App\Http\Controllers\Public\BanController as PublicBanController;
 use App\Http\Controllers\Public\AlbumController as PublicAlbumController;
 use App\Http\Controllers\Public\AuthorController as PublicAuthorController;
+use App\Http\Controllers\Public\HistoryController;
+use App\Http\Controllers\Public\FavoriteController;
 
 // Общедоступные страницы
 Route::get("/", [HomeController::class, "index"])->name("home");
@@ -38,6 +40,14 @@ Route::prefix("public")
     ->name("public.")
     ->middleware("auth")
     ->group(function () {
+        Route::get("/favorites", [FavoriteController::class, "index"])->name(
+            "favorites.index",
+        );
+        Route::post("/favorites/{track}/toggle", [
+            FavoriteController::class,
+            "toggle",
+        ])->name("favorites.toggle");
+
         Route::get("authors/{author}", [
             PublicAuthorController::class,
             "show",
@@ -100,8 +110,18 @@ Route::prefix("public")
         ])->name("tracks.listen");
 
         // Обжалование бана
-        Route::get("banned", [PublicBanController::class, "show"])->name("ban.show");
-        Route::post("banned/appeal", [PublicBanController::class, "appeal"])->name("ban.appeal");
+        Route::get("banned", [PublicBanController::class, "show"])->name(
+            "ban.show",
+        );
+        Route::post("banned/appeal", [
+            PublicBanController::class,
+            "appeal",
+        ])->name("ban.appeal");
+
+        // История прослушиваний
+        Route::get("history", [HistoryController::class, "index"])->name(
+            "history.index",
+        );
     });
 // Админ панель системы
 Route::prefix("admin")
@@ -126,7 +146,15 @@ Route::prefix("admin")
         ])->name("users.unban");
 
         // Обработка заявок на разбан
-        Route::get("appeals", [AdminBanAppealController::class, "index"])->name("appeals.index");
-        Route::post("appeals/{appeal}/approve", [AdminBanAppealController::class, "approve"])->name("appeals.approve");
-        Route::post("appeals/{appeal}/reject", [AdminBanAppealController::class, "reject"])->name("appeals.reject");
+        Route::get("appeals", [AdminBanAppealController::class, "index"])->name(
+            "appeals.index",
+        );
+        Route::post("appeals/{appeal}/approve", [
+            AdminBanAppealController::class,
+            "approve",
+        ])->name("appeals.approve");
+        Route::post("appeals/{appeal}/reject", [
+            AdminBanAppealController::class,
+            "reject",
+        ])->name("appeals.reject");
     });

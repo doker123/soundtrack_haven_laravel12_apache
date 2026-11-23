@@ -25,18 +25,17 @@ class AudioStreamController extends Controller
         }
 
         $fullPath = Storage::disk("local")->path($track->storage_key);
-        $headers = [
-            "Content-Type" => $track->mime_type ?? "audio/mpeg",
-            "Content-Disposition" =>
-                'inline; filename="' . addslashes($track->title) . '.mp3"',
+        $mimeType = Storage::disk("local")->mimeType($track->storage_key) ?: ($track->mime_type ?? "audio/mpeg");
+
+        while (ob_get_level() > 0) {
+            ob_end_clean();
+        }
+
+        return response()->file($fullPath, [
+            "Content-Type" => $mimeType,
             "Accept-Ranges" => "bytes",
             "Cache-Control" => "no-cache, private",
-        ];
-
-        $response = new BinaryFileResponse($fullPath, 200, $headers, true, 'inline');
-        $response->prepare($request);
-
-        return $response;
+        ]);
     }
 
     public function recordHistory(Request $request, Track $track): JsonResponse
@@ -44,16 +43,19 @@ class AudioStreamController extends Controller
         if (!auth()->check()) {
             return response()->json(["status" => "guest_ignored"], 200);
         }
+
         $validated = $request->validate([
-            "played_duration_ms" => ["required", "integer", "min:1000"], // минимум 1 секунда
+            "played_duration_ms" => ["required", "integer", "min:1000"],
         ]);
+
         $user = $request->user();
-        
+
         $user->listeningHistory()->create([
             "track_id" => $track->id,
             "played_duration_ms" => $validated["played_duration_ms"],
             "played_at" => now(),
         ]);
+
         return response()->json([
             "status" => "success",
             "message" => "История прослушивания обновлена",

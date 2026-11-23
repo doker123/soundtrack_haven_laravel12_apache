@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Builder;
 
 class ListeningHistory extends Model
 {
+    public $timestamps = false;
+
     protected $fillable = [
         'user_id',
         'track_id',
@@ -24,7 +26,7 @@ class ListeningHistory extends Model
     {
         return $this->belongsTo(User::class);
     }
-    
+
     public function track(): BelongsTo
     {
         return $this->belongsTo(Track::class);
@@ -33,11 +35,11 @@ class ListeningHistory extends Model
     public function listenedPercent(): int
     {
         $durationMs = $this->track?->duration_ms;
-    
+
         if (! $durationMs || ! $this->played_duration_ms) {
             return 0;
         }
-    
+
         return min(100, (int) round($this->played_duration_ms / $durationMs * 100));
     }
 
@@ -45,7 +47,7 @@ class ListeningHistory extends Model
     {
         return $query->where('user_id', $userId);
     }
-    
+
     public function scopeRecent(Builder $query): Builder
     {
         return $query->orderByDesc('played_at');

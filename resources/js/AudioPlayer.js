@@ -11,6 +11,10 @@ export default class AudioPlayer {
 
         this.fallbackDuration = 0;
 
+        this.currentTrackId = null;
+        this.playStartedAt = null;
+        this.accumulatedMs = 0;
+
         this.initElements();
         this.initEvents();
     }
@@ -63,10 +67,33 @@ export default class AudioPlayer {
         }
 
         this.audio.addEventListener("timeupdate", () => this.onTimeUpdate());
-        this.audio.addEventListener("loadedmetadata", () => this.onLoadedMetadata());
+        this.audio.addEventListener("loadedmetadata", () =>
+            this.onLoadedMetadata(),
+        );
+        this.audio.addEventListener("ended", () => {
+            this.sendHistory();
+            this.next();
+        });
         this.audio.addEventListener("ended", () => this.next());
-        this.audio.addEventListener("error", () => {
+        this.audio.addEventListener("error", (e) => {
+            console.error(
+                "Ошибка загрузки аудио:",
+                this.audio.error,
+                this.audio.src,
+            );
+            this.updatePlayIcon(false);
+        });
 
+        this.audio.addEventListener("play", () => {
+            this.playStartedAt = Date.now();
+        });
+
+        this.audio.addEventListener("pause", () => {
+            this.accumulatePlayTime();
+        });
+
+        window.addEventListener("beforeunload", () => {
+            this.sendHistory();
         });
 
         if (this.seekSlider) {
@@ -76,47 +103,106 @@ export default class AudioPlayer {
 
                 const duration = this.getDuration();
                 if (this.currentTimeEl && duration > 0) {
-                    const previewTime = (this.seekSlider.value / 100) * duration;
-                    this.currentTimeEl.textContent = this.formatTime(previewTime);
+                    const previewTime =
+                        (this.seekSlider.value / 100) * duration;
+                    this.currentTimeEl.textContent =
+                        this.formatTime(previewTime);
                 }
             });
             this.seekSlider.addEventListener("change", () => {
                 const duration = this.getDuration();
                 if (duration > 0) {
-                    this.audio.currentTime = (this.seekSlider.value / 100) * duration;
+                    this.audio.currentTime =
+                        (this.seekSlider.value / 100) * duration;
                 }
                 this.isSeeking = false;
             });
         }
     }
+    setQueue(tracks, startIndex = 0) {
+        this.queue = tracks;
+        if (
+            this.queue.length > 0 &&
+            startIndex >= 0 &&
+            startIndex < this.queue.length
+        ) {
+            this.currentIndex = startIndex;
+            this.loadTrack(this.queue[this.currentIndex]);
+        }
+    }
     loadTrack(trackData) {
+        this.sendHistory();
+        if (!trackData?.url) {
+            console.error("Нет URL у трека!", trackData);
+            return;
+        }
+
         this.audio.pause();
         this.audio.currentTime = 0;
-        this.audio.src = '';
+
+        this.currentTrackId = trackData.id || null;
+        this.accumulatedMs = 0;
+        this.playStartedAt = null;
 
         this.show();
         this.fallbackDuration = Number(trackData.duration) || 0;
         this.audio.src = trackData.url;
-        this.audio.load();
 
+        // Update UI
         if (this.titleEl) this.titleEl.textContent = `Трек: ${trackData.title}`;
-        if (this.artistEl) this.artistEl.textContent = `Автор: ${trackData.author || "Неизвестен"}`;
+        if (this.artistEl)
+            this.artistEl.textContent = `Автор: ${trackData.author || "Неизвестен"}`;
         if (this.coverEl && trackData.cover) this.coverEl.src = trackData.cover;
         if (this.durationEl && this.fallbackDuration > 0) {
-            this.durationEl.textContent = this.formatTime(this.fallbackDuration);
+            this.durationEl.textContent = this.formatTime(
+                this.fallbackDuration,
+            );
         }
-
+        // Reset seek slider UI
         if (this.seekSlider) {
             this.seekSlider.value = 0;
             this.updateSeekFill(0);
         }
-
-        const tryPlay = () => {
-            this.play();
-            this.audio.removeEventListener('canplay', tryPlay);
-        };
-        this.audio.addEventListener('canplay', tryPlay);
         this.play();
+    }
+    accumulatePlayTime() {
+        if (this.playStartedAt) {
+            this.accumulatedMs += Date.now() - this.playStartedAt;
+            this.playStartedAt = null;
+        }
+    }
+    sendHistory() {
+        this.accumulatePlayTime();
+
+        // В recordHistory стоит правило min:1000 (минимум 1 секунда)
+        if (!this.currentTrackId || this.accumulatedMs < 1000) {
+            return;
+        }
+
+        const trackId = this.currentTrackId;
+        const durationMs = Math.round(this.accumulatedMs);
+
+        
+        this.accumulatedMs = 0;
+
+        const csrfToken = document.querySelector(
+            'meta[name="csrf-token"]',
+        )?.content;
+
+        fetch(`/public/tracks/${trackId}/listen`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                "X-CSRF-TOKEN": csrfToken || "",
+            },
+            body: JSON.stringify({
+                played_duration_ms: durationMs,
+            }),
+            keepalive: true, // гарантирует отправку при закрытии вкладки
+        }).catch((err) => {
+            console.error("Ошибка записи истории:", err);
+        });
     }
     show() {
         if (this.playerBar && this.playerBar.classList.contains("hidden")) {
@@ -124,13 +210,22 @@ export default class AudioPlayer {
         }
     }
     play() {
+        if (!this.audio.src) return;
+
         this.audio
             .play()
             .then(() => {
                 this.updatePlayIcon(true);
             })
-            .catch((e) => {
-                // Optional: handle playback errors silently
+            .catch((err) => {
+                this.updatePlayIcon(false);
+                if (err.name !== "AbortError") {
+                    console.warn(
+                        "Не удалось запустить воспроизведение:",
+                        err.name,
+                        err.message,
+                    );
+                }
             });
     }
 
@@ -200,7 +295,8 @@ export default class AudioPlayer {
             this.audio.currentTime = 0;
             return;
         }
-        this.currentIndex = (this.currentIndex - 1 + this.queue.length) % this.queue.length;
+        this.currentIndex =
+            (this.currentIndex - 1 + this.queue.length) % this.queue.length;
         this.loadTrack(this.queue[this.currentIndex]);
     }
     toggleMute() {
@@ -251,7 +347,11 @@ export default class AudioPlayer {
         }
     }
     getDuration() {
-        if (this.audio.duration && !isNaN(this.audio.duration) && isFinite(this.audio.duration)) {
+        if (
+            this.audio.duration &&
+            !isNaN(this.audio.duration) &&
+            isFinite(this.audio.duration)
+        ) {
             return this.audio.duration;
         }
         return this.fallbackDuration || 0;
@@ -259,7 +359,9 @@ export default class AudioPlayer {
     onTimeUpdate() {
         const duration = this.getDuration();
         if (this.currentTimeEl) {
-            this.currentTimeEl.textContent = this.formatTime(this.audio.currentTime);
+            this.currentTimeEl.textContent = this.formatTime(
+                this.audio.currentTime,
+            );
         }
         if (duration > 0 && !this.isSeeking && this.seekSlider) {
             const percent = (this.audio.currentTime / duration) * 100;
@@ -281,8 +383,8 @@ export default class AudioPlayer {
     }
     updateSeekFill(percent) {
         if (!this.seekSlider) return;
-        const activeColor = "#8b5cf6";
-        const inactiveColor = "#374151";
+        const activeColor = "#8b5cf6"; // violet-500
+        const inactiveColor = "#374151"; // gray-700
         this.seekSlider.style.background = `linear-gradient(to right, ${activeColor} 0%, ${activeColor} ${percent}%, ${inactiveColor} ${percent}%, ${inactiveColor} 100%)`;
     }
 }

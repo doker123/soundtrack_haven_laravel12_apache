@@ -2,7 +2,7 @@
 
 
     <div class="shrink-0">
-        <a href="/" class="block text-5xl text-[#F5F5F7] hover:text-[#6d5898] active:text-[#5825b5] transition-colors tracking-wider">
+        <a href="{{route('home')}}" class="block text-5xl text-[#F5F5F7] hover:text-[#6d5898] active:text-[#5825b5] transition-colors tracking-wider">
             SH
         </a>
     </div>
@@ -41,7 +41,7 @@
         @endcan
 
         @auth
-        <a href="#" class="hover:text-[#6d5898] active:text-[#5825b5] transition-colors uppercase tracking-wider">
+        <a href="{{route('public.favorites.index')}}" class="hover:text-[#6d5898] active:text-[#5825b5] transition-colors uppercase tracking-wider">
             Избранное
         </a>
         <a href="#" class="hover:text-[#6d5898] active:text-[#5825b5] transition-colors uppercase tracking-wider">
@@ -49,6 +49,9 @@
         </a>
         <a href="{{route('public.playlists.index')}}" class="hover:text-[#6d5898] active:text-[#5825b5] transition-colors uppercase tracking-wider">
             Плейлисты
+        </a>
+        <a href="{{route('public.history.index')}}" class="hover:text-[#6d5898] active:text-[#5825b5] transition-colors uppercase tracking-wider">
+            История
         </a>
         @endauth
     </nav>

@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
             player.loadTrack(player.queue[0]);
         });
     }
-    
+
     const playAuthorBtn = document.getElementById('play-all-author-tracks');
     if (playAuthorBtn) {
         playAuthorBtn.addEventListener('click', () => {

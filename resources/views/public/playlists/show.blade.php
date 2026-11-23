@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="max-w-6xl mx-auto px-6 py-10">
-    <a href="{{ route('playlists.index') }}" class="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-white mb-6">
+    <a href="{{ route('public.playlists.index') }}" class="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-white mb-6">
         ← К моим плейлистам
     </a>
 
@@ -24,10 +24,10 @@
 
             @can('update', $playlist)
                 <div class="flex items-center gap-3">
-                    <a href="{{ route('playlists.edit', $playlist) }}" class="text-xs bg-yellow-500/10 text-yellow-400 hover:bg-yellow-500/20 px-4 py-2 rounded-xl border border-yellow-500/30">
+                    <a href="{{ route('public.playlists.edit', $playlist) }}" class="text-xs bg-yellow-500/10 text-yellow-400 hover:bg-yellow-500/20 px-4 py-2 rounded-xl border border-yellow-500/30">
                         Редактировать
                     </a>
-                    <form action="{{ route('playlists.destroy', $playlist) }}" method="POST">
+                    <form action="{{ route('public.playlists.destroy', $playlist) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="text-xs bg-red-500/10 text-red-400 hover:bg-red-500/20 px-4 py-2 rounded-xl border border-red-500/30 cursor-pointer">
@@ -61,7 +61,7 @@
 
                     @can('update', $playlist)
                         <div class="col-span-1 text-right" onclick="event.stopPropagation()">
-                            <form action="{{ route('playlists.tracks.remove', [$playlist, $track]) }}" method="POST">
+                            <form action="{{ route('public.playlists.tracks.remove', [$playlist, $track]) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="text-xs text-red-400 hover:text-red-300 p-1 cursor-pointer" title="Убрать из плейлиста">
