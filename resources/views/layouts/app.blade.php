@@ -11,7 +11,7 @@
 </head>
 <body class="bg-main-bg text-slate-100 antialised font-main">
     @include('modules.header')
-    <main>
+    <main class="pb-20">
         @yield('content')
     </main>
     @include('modules.footer')
