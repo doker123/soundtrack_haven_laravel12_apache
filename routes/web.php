@@ -17,9 +17,11 @@ use App\Http\Controllers\Public\AlbumController as PublicAlbumController;
 use App\Http\Controllers\Public\AuthorController as PublicAuthorController;
 use App\Http\Controllers\Public\HistoryController;
 use App\Http\Controllers\Public\FavoriteController;
+use App\Http\Controllers\Public\SearchController;
 
 // Общедоступные страницы
 Route::get("/", [HomeController::class, "index"])->name("home");
+Route::get("/search", [SearchController::class, "index"])->name("search");
 Route::get("/tracks/{track}/stream", [
     AudioStreamController::class,
     "stream",

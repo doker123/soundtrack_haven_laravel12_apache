@@ -74,7 +74,10 @@
                 
                 @if($track->storage_key)
                     <div class="flex items-center gap-3 p-3 bg-main-light/50 border border-gray-700 rounded-xl mb-3 text-xs text-gray-400">
-                        <span>🎵 Текущий файл сохранен</span>
+                        <svg class="w-4 h-4 text-violet-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
+                        </svg>
+                        <span>Текущий файл сохранен</span>
                         <span>•</span>
                         <span>Длительность: {{ $track->duration_ms ? gmdate('i:s', (int)($track->duration_ms / 1000)) : '—' }}</span>
                     </div>

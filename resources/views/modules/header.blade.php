@@ -44,7 +44,7 @@
         <a href="{{route('public.favorites.index')}}" class="hover:text-[#6d5898] active:text-[#5825b5] transition-colors uppercase tracking-wider">
             Избранное
         </a>
-        <a href="#" class="hover:text-[#6d5898] active:text-[#5825b5] transition-colors uppercase tracking-wider">
+        <a href="{{ route('search') }}" class="hover:text-[#6d5898] active:text-[#5825b5] transition-colors uppercase tracking-wider">
             Поиск
         </a>
         <a href="{{route('public.playlists.index')}}" class="hover:text-[#6d5898] active:text-[#5825b5] transition-colors uppercase tracking-wider">

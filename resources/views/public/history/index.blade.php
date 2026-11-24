@@ -90,8 +90,12 @@
                 </div>
             </div>
         @empty
-            <div class="py-20 text-center text-gray-500 bg-main-dark border border-gray-800 rounded-3xl">
-                <div class="text-5xl mb-4">🎵</div>
+            <div class="py-20 text-center text-gray-500 bg-main-dark border border-gray-800 rounded-3xl flex flex-col items-center">
+                <div class="w-16 h-16 rounded-2xl bg-gray-900 border border-gray-800 flex items-center justify-center text-gray-500 mb-4">
+                    <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
+                    </svg>
+                </div>
                 <p class="text-lg font-semibold text-gray-400">Вы ещё ничего не слушали</p>
                 <p class="text-sm text-gray-600 mt-1">Начните с главной страницы или любого альбома</p>
                 <a href="{{ route('home') }}"
