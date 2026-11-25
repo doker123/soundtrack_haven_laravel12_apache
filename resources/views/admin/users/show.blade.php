@@ -5,7 +5,7 @@
 @section('content')
 <div class="max-w-7xl mx-auto px-6 py-10">
 
-    {{-- Хлебные крошки и заголовок --}}
+    
     <div class="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-3 items-center mb-8">
         <div>
             <div class="flex items-center gap-2 text-xs text-violet-400 font-semibold uppercase tracking-wider mb-1">
@@ -26,7 +26,7 @@
         </a>
     </div>
 
-    {{-- Уведомления --}}
+    
     @if(session('success'))
         <div class="mb-6 p-4 rounded-xl bg-emerald-950/60 border border-emerald-500/40 text-emerald-300 text-sm">
             {{ session('success') }}
@@ -38,13 +38,13 @@
         </div>
     @endif
 
-    {{-- Двухколоночная сетка --}}
+    
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
-        {{-- ═════════ САЙДБАР (4/12) ═════════ --}}
+        
         <aside class="lg:col-span-4 space-y-6 lg:sticky lg:top-6">
 
-            {{-- Карточка профиля --}}
+            
             <div class="bg-main-dark border border-gray-800 rounded-3xl p-6 shadow-xl
                         grid grid-cols-[auto_1fr] gap-4 items-center">
                 <img src="{{ $user->avatar?->url ?? asset('images/default-avatar.svg') }}"
@@ -75,7 +75,7 @@
                 </div>
             </div>
 
-            {{-- Статус бана --}}
+            
             @php $activeBan = $user->activeBan(); @endphp
             <div class="bg-main-dark border border-gray-800 rounded-3xl p-6 shadow-xl">
                 <h2 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Статус аккаунта</h2>
@@ -106,7 +106,7 @@
                         </div>
                     </div>
 
-                    {{-- Кнопка разбана (POST запрос без @method('PATCH')) --}}
+                    
                     <form action="{{ route('admin.users.unban', $user) }}" method="POST"
                           class="mt-4">
                         @csrf
@@ -126,7 +126,7 @@
                 @endif
             </div>
 
-            {{-- Опасная зона (Удаление) --}}
+            
             <div class="bg-main-dark border border-red-500/30 rounded-3xl p-6 shadow-xl">
                 <h2 class="text-xs font-semibold text-red-400 uppercase tracking-wider mb-3">Опасная зона</h2>
                 <form action="{{ route('admin.users.destroy', $user) }}" method="POST">
@@ -141,10 +141,10 @@
             </div>
         </aside>
 
-        {{-- ═════════ ОСНОВНОЙ КОНТЕНТ (8/12) ═════════ --}}
+        
         <main class="lg:col-span-8 space-y-6">
 
-            {{-- Смена роли --}}
+            
             <div class="bg-main-dark border border-gray-800 rounded-3xl p-6 shadow-xl">
                 <h2 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Изменение роли</h2>
                 <form action="{{ route('admin.users.update', $user) }}" method="POST"
@@ -175,7 +175,7 @@
                 </form>
             </div>
 
-            {{-- Форма выдачи бана --}}
+            
             @if(! $activeBan)
                 <div class="bg-main-dark border border-gray-800 rounded-3xl p-6 shadow-xl">
                     <h2 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Заблокировать пользователя</h2>
@@ -221,7 +221,7 @@
                 </div>
             @endif
 
-            {{-- История всех банов --}}
+            
             @if($user->bans->isNotEmpty())
                 <div class="bg-main-dark border border-gray-800 rounded-3xl p-6 shadow-xl">
                     <h2 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">История банов</h2>

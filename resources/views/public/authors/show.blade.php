@@ -5,16 +5,16 @@
 @section('content')
 <div class="max-w-7xl mx-auto px-6 py-8 flex flex-col gap-12">
 
-    {{-- 1. Шапка автора --}}
+    
     <div class="flex flex-col md:flex-row items-center md:items-start gap-8 bg-main-dark border border-gray-800 rounded-3xl p-6 md:p-8">
-        {{-- Фото / Аватар автора --}}
+        
         <div class="w-40 h-40 md:w-52 md:h-52 rounded-full overflow-hidden bg-gray-900 shrink-0 border-4 border-gray-800 shadow-2xl">
             <img src="{{ $author->image_url }}"
                  alt="{{ $author->name }}"
                  class="w-full h-full object-cover">
         </div>
 
-        {{-- Информация об авторе --}}
+        
         <div class="flex flex-col gap-3 items-center md:items-start text-center md:text-left flex-1 min-w-0">
             <span class="text-xs uppercase tracking-widest text-violet-400 font-bold">Композитор / Автор</span>
             <h1 class="text-3xl md:text-5xl font-black text-white truncate max-w-full">
@@ -33,7 +33,7 @@
                 </p>
             @endif
 
-            {{-- Кнопка воспроизведения всех треков автора --}}
+            
             @if($author->tracks->isNotEmpty())
                 <div class="mt-3">
                     <button id="play-all-author-tracks"
@@ -49,7 +49,7 @@
         </div>
     </div>
 
-    {{-- 2. Секция: Треки автора --}}
+    
     <section class="flex flex-col gap-6">
         <div>
             <h2 class="text-2xl font-extrabold text-white">Треки автора</h2>
@@ -69,7 +69,7 @@
                     <div class="flex items-center gap-4 min-w-0">
                         <span class="text-gray-500 w-6 text-center font-mono text-sm shrink-0">{{ $index + 1 }}</span>
 
-                        {{-- Мини-обложка альбома трека --}}
+                        
                         <div class="w-10 h-10 rounded-lg overflow-hidden bg-gray-900 shrink-0 border border-gray-700/60">
                             <img src="{{ $track->album?->cover_url ?? asset('images/default-cover.svg') }}"
                                  alt="{{ $track->title }}"
@@ -124,7 +124,7 @@
                             </form>
                         @endauth
 
-                        {{-- Добавить в плейлист --}}
+                        
                         @auth
                             @if(auth()->user()->playlists->isNotEmpty())
                                 <div class="relative group/menu" onclick="event.stopPropagation()">
@@ -156,7 +156,7 @@
         </div>
     </section>
 
-    {{-- 3. Секция: Альбомы автора --}}
+    
     <section class="flex flex-col gap-6">
         <div>
             <h2 class="text-2xl font-extrabold text-white">Альбомы</h2>

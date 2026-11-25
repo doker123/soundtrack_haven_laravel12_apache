@@ -16,7 +16,7 @@
             @csrf
             @method('PUT')
 
-            {{-- Название --}}
+            
             <div>
                 <label for="title" class="block text-sm font-medium text-gray-300 mb-2">Название альбома *</label>
                 <input type="text" id="title" name="title" value="{{ old('title', $album->title) }}" required
@@ -24,7 +24,7 @@
                 @error('title') <p class="text-red-400 text-xs mt-1">{{ $message }}</p> @enderror
             </div>
 
-            {{-- Сетка: Автор и Статус --}}
+            
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                     <label for="author_id" class="block text-sm font-medium text-gray-300 mb-2">Автор *</label>
@@ -53,7 +53,7 @@
                 </div>
             </div>
 
-            {{-- Сетка: Дата выхода и Позиция --}}
+            
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                     <label for="release_date" class="block text-sm font-medium text-gray-300 mb-2">Дата выхода</label>
@@ -71,7 +71,7 @@
                 </div>
             </div>
 
-            {{-- Текущая обложка и загрузка новой --}}
+            
             <div>
                 <label class="block text-sm font-medium text-gray-300 mb-2">Обложка</label>
                 <div class="flex items-center gap-5 p-4 bg-main-light/50 border border-gray-700 rounded-2xl mb-3">
@@ -87,7 +87,7 @@
                 @error('cover_path') <p class="text-red-400 text-xs mt-1">{{ $message }}</p> @enderror
             </div>
 
-            {{-- Описание --}}
+            
             <div>
                 <label for="description" class="block text-sm font-medium text-gray-300 mb-2">Описание</label>
                 <textarea id="description" name="description" rows="4"
@@ -95,7 +95,7 @@
                 @error('description') <p class="text-red-400 text-xs mt-1">{{ $message }}</p> @enderror
             </div>
 
-            {{-- Кнопки --}}
+            
             <div class="flex items-center justify-end gap-4 pt-4 border-t border-gray-800">
                 <a href="{{ route('admin.albums.index') }}" class="px-5 py-2.5 text-sm text-gray-400 hover:text-white transition-colors">
                     Отмена

@@ -27,6 +27,13 @@ Route::get("/tracks/{track}/stream", [
     "stream",
 ])->name("tracks.stream");
 Route::view("/agreement", "public.agreement")->name("agreement");
+Route::get("authors/{author}", [PublicAuthorController::class, "show"])->name(
+    "public.authors.show",
+);
+Route::get("albums/{album}", [PublicAlbumController::class, "show"])->name(
+    "public.albums.show",
+);
+
 // Авторизация в системе
 Route::middleware("guest")->group(function () {
     Route::get("/login", [LoginController::class, "show"])->name("login");
@@ -50,15 +57,6 @@ Route::prefix("public")
             "toggle",
         ])->name("favorites.toggle");
 
-        Route::get("authors/{author}", [
-            PublicAuthorController::class,
-            "show",
-        ])->name("authors.show");
-
-        Route::get("albums/{album}", [
-            PublicAlbumController::class,
-            "show",
-        ])->name("albums.show");
         // Маршруты для управления плейлистом.
         Route::resource("playlists", PlaylistController::class);
 
@@ -76,11 +74,11 @@ Route::prefix("public")
             "logout",
         );
 
+        // Маршруты страницы настроек.
         Route::get("/settings", [SettingsController::class, "edit"])->name(
             "settings.edit",
         );
 
-        // Маршруты страницы настроек.
         Route::patch("/settings/name", [
             SettingsController::class,
             "updateName",

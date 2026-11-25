@@ -9,12 +9,15 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="icon" href="{{ asset('images/favicon/favicon.svg') }}">
 </head>
-<body class="bg-main-bg text-slate-100 antialised font-main">
+<body class="bg-main-bg text-slate-100 antialised font-main min-h-screen flex flex-col">
     @include('modules.header')
-    <main class="pb-20">
-        @yield('content')
-    </main>
-    @include('modules.footer')
+    <div class="flex-1 flex flex-col">
+        <main class="flex-1">
+            @yield('content')
+        </main>
+        @include('modules.footer')
+    </div>
     @include('modules.player')
+    @stack('scripts')
 </body>
 </html>

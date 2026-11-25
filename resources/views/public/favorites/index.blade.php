@@ -5,7 +5,7 @@
 @section('content')
 <div class="max-w-7xl mx-auto px-6 py-8 flex flex-col gap-8">
 
-    {{-- Заголовок --}}
+    
     <section>
         <h1 class="text-2xl md:text-3xl font-extrabold text-white">
             Избранные треки
@@ -15,7 +15,7 @@
         </p>
     </section>
 
-    {{-- Список избранных треков --}}
+    
     <section class="flex flex-col gap-5">
 
         @if($tracks->isNotEmpty())
@@ -46,7 +46,7 @@
                          data-track-cover="{{ $track->album?->cover_url ?? asset('images/default-cover.svg') }}"
                          data-track-duration="{{ $track->duration_ms ? (int)($track->duration_ms / 1000) : 0 }}">
 
-                        {{-- Информация о треке --}}
+                        
                         <div class="flex items-center gap-3.5 min-w-0">
 
                             <div class="w-12 h-12 rounded-xl overflow-hidden
@@ -73,14 +73,14 @@
 
                         </div>
 
-                        {{-- Длительность и удаление --}}
+                        
                         <div class="flex items-center gap-2 pl-2 shrink-0">
 
                             <span class="text-xs font-mono text-gray-500">
                                 {{ $track->duration_ms ? gmdate('i:s', (int)($track->duration_ms / 1000)) : '' }}
                             </span>
 
-                            {{-- Удалить из избранного --}}
+                            
                             <form action="{{ route('public.favorites.toggle', $track) }}"
                                   method="POST">
 
@@ -139,14 +139,14 @@
 
             </div>
 
-            {{-- Пагинация --}}
+            
             <div class="mt-4">
                 {{ $tracks->links() }}
             </div>
 
         @else
 
-            {{-- Пустое избранное --}}
+            
             <div class="py-16 text-center bg-main-dark
                         border border-gray-800 rounded-2xl">
 

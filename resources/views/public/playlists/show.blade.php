@@ -8,7 +8,7 @@
         ← К моим плейлистам
     </a>
 
-    {{-- Шапка плейлиста --}}
+    
     <div class="flex flex-col md:flex-row gap-8 items-start bg-main-dark border border-gray-800 p-8 rounded-3xl mb-8 shadow-xl">
         <img src="{{ $playlist->cover_url }}" alt="{{ $playlist->title }}" class="w-52 h-52 object-cover rounded-2xl shadow-xl shrink-0 border border-gray-700 bg-gray-900">
         <div class="flex-1">
@@ -39,7 +39,7 @@
         </div>
     </div>
 
-    {{-- Список треков в плейлисте --}}
+    
     <div class="bg-main-dark border border-gray-800 rounded-3xl overflow-hidden shadow-xl">
         <div class="divide-y divide-gray-800/80">
             @forelse($playlist->tracks as $index => $track)

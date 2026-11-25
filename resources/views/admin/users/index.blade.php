@@ -16,7 +16,7 @@
         </div>
     </div>
 
-    {{-- Flash --}}
+    
     @if(session('success'))
         <div class="mb-6 p-4 rounded-xl bg-emerald-950/60 border border-emerald-500/40 text-emerald-300 text-sm">
             {{ session('success') }}
@@ -28,7 +28,7 @@
         </div>
     @endif
 
-    {{-- Фильтры --}}
+    
     <form method="GET" action="{{ route('admin.users.index') }}"
           class="grid grid-cols-1 md:grid-cols-12 gap-3 mb-6
                  bg-main-dark border border-gray-800 rounded-2xl p-4 shadow-xl">
@@ -74,10 +74,10 @@
         </div>
     </form>
 
-    {{-- Grid-таблица --}}
+    
     <div class="bg-main-dark border border-gray-800 rounded-3xl overflow-hidden shadow-xl">
 
-        {{-- Header --}}
+        
         <div class="hidden md:grid grid-cols-12 gap-4 items-center px-6 py-4
                     bg-main-light/60 text-xs font-semibold text-gray-400 uppercase tracking-wider
                     border-b border-gray-800">
@@ -88,7 +88,7 @@
             <div class="col-span-2 text-right">Действия</div>
         </div>
 
-        {{-- Body --}}
+        
         <div class="divide-y divide-gray-800/80">
             @forelse($users as $user)
                 @php
@@ -97,7 +97,7 @@
                 <div class="grid grid-cols-2 md:grid-cols-12 gap-4 items-center
                             px-6 py-3.5 hover:bg-main-light/30 transition-colors text-sm">
 
-                    {{-- Аватар --}}
+                    
                     <div class="col-span-1">
                         <img src="{{ $user->avatar?->url ?? asset('images/default-avatar.svg') }}"
                              alt="{{ $user->name }}"
@@ -105,7 +105,7 @@
                                     border border-gray-700 bg-gray-900">
                     </div>
 
-                    {{-- Пользователь --}}
+                    
                     <div class="col-span-4 min-w-0">
                         <a href="{{ route('admin.users.show', $user) }}"
                            class="font-semibold text-white hover:text-violet-300 transition-colors truncate block">
@@ -114,7 +114,7 @@
                         <div class="text-xs text-gray-500 truncate">{{ $user->email }}</div>
                     </div>
 
-                    {{-- Роль --}}
+                    
                     <div class="col-span-2">
                         <span class="inline-block px-2.5 py-1 rounded-lg text-xs font-semibold
                                      bg-violet-950/60 text-violet-300 border border-violet-500/30">
@@ -122,7 +122,7 @@
                         </span>
                     </div>
 
-                    {{-- Статус --}}
+                    
                     <div class="col-span-3">
                         @if($activeBan)
                             <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold
@@ -146,7 +146,7 @@
                         @endif
                     </div>
 
-                    {{-- Действия --}}
+                    
                     <div class="col-span-2 flex items-center justify-end gap-3">
                         <a href="{{ route('admin.users.show', $user) }}"
                            class="text-xs text-yellow-400 hover:text-yellow-300 hover:underline">

@@ -26,9 +26,9 @@
         </div>
     @endif
 
-    {{-- Сетка-таблица треков --}}
+    
     <div class="bg-main-dark border border-gray-800 rounded-3xl overflow-hidden shadow-xl">
-        {{-- Header --}}
+        
         <div class="hidden md:grid grid-cols-12 gap-4 items-center px-6 py-4 bg-main-light/60 text-xs font-semibold text-gray-400 uppercase tracking-wider border-b border-gray-800">
             <div class="col-span-1 text-center">#</div>
             <div class="col-span-4">Название</div>
@@ -38,38 +38,38 @@
             <div class="col-span-2 text-right">Действия</div>
         </div>
 
-        {{-- Body --}}
+        
         <div class="divide-y divide-gray-800/80">
             @forelse($tracks as $index => $track)
                 <div class="grid grid-cols-2 md:grid-cols-12 gap-4 items-center px-6 py-3.5 hover:bg-main-light/30 transition-colors text-sm">
-                    {{-- Позиция --}}
+                    
                     <div class="col-span-1 text-gray-500 font-mono text-center">
                         {{ $index + 1 }}
                     </div>
 
-                    {{-- Название --}}
+                    
                     <div class="col-span-4 font-semibold text-white truncate">
                         <a href="{{ route('admin.tracks.show', $track) }}" class="hover:text-violet-300 transition-colors">
                             {{ $track->title }}
                         </a>
                     </div>
 
-                    {{-- Автор --}}
+                    
                     <div class="col-span-2 text-gray-400 truncate">
                         {{ $track->author?->name ?? '—' }}
                     </div>
 
-                    {{-- Альбом --}}
+                    
                     <div class="col-span-2 text-gray-400 truncate text-xs">
                         {{ $track->album?->title ?? '—' }}
                     </div>
 
-                    {{-- Длительность --}}
+                    
                     <div class="col-span-1 text-gray-400 font-mono text-xs text-center">
                         {{ $track->duration_ms ? gmdate('i:s', (int)($track->duration_ms / 1000)) : '—' }}
                     </div>
 
-                    {{-- Действия --}}
+                    
                     <div class="col-span-2 flex items-center justify-end gap-3">
                         <a href="{{ route('admin.tracks.edit', $track) }}" class="text-xs text-yellow-400 hover:text-yellow-300 hover:underline">
                             Изменить
@@ -89,7 +89,7 @@
                 </div>
             @endforelse
         </div>
-        {{-- Пагинация --}}
+        
         <div class="mt-6">
             {{ $tracks->links() }}
         </div>

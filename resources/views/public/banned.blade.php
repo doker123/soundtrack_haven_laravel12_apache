@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="max-w-2xl mx-auto px-6 py-12 flex flex-col gap-8">
-    {{-- Карточка блокировки --}}
+    
     <div class="bg-main-dark border border-red-500/40 rounded-3xl p-6 md:p-8 flex flex-col gap-6 shadow-2xl">
         <div class="flex items-start gap-4">
             <div class="w-14 h-14 rounded-2xl bg-red-500/10 border border-red-500/30 flex items-center justify-center shrink-0 text-red-400">
@@ -18,7 +18,7 @@
             </div>
         </div>
 
-        {{-- Детали бана --}}
+        
         <div class="bg-main-light/30 border border-gray-800 rounded-2xl p-4 flex flex-col gap-3 text-sm">
             <div class="flex flex-col sm:flex-row sm:justify-between gap-1 border-b border-gray-800/80 pb-2">
                 <span class="text-gray-400">Пользователь:</span>
@@ -38,7 +38,7 @@
             </div>
         </div>
 
-        {{-- Уведомления --}}
+        
         @if(session('status'))
             <div class="p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-2xl text-emerald-300 text-sm">
                 {{ session('status') }}
@@ -50,7 +50,7 @@
             </div>
         @endif
 
-        {{-- Если апелляция уже подана и ожидает решения --}}
+        
         @if($latestAppeal && $latestAppeal->isPending())
             <div class="bg-amber-500/10 border border-amber-500/30 rounded-2xl p-5 flex flex-col gap-2">
                 <div class="flex items-center gap-2 text-amber-400 font-semibold text-sm">
@@ -68,7 +68,7 @@
                     {{ $latestAppeal->reason }}
                 </div>
             </div>
-        {{-- Если апелляция была отклонена --}}
+        
         @elseif($latestAppeal && $latestAppeal->isRejected())
             <div class="bg-red-500/10 border border-red-500/30 rounded-2xl p-5 flex flex-col gap-2">
                 <div class="flex items-center gap-2 text-red-400 font-semibold text-sm">
@@ -89,7 +89,7 @@
             </div>
         @endif
 
-        {{-- Форма обжалования (доступна, если нет активной заявки на рассмотрении) --}}
+        
         @if(!$latestAppeal || !$latestAppeal->isPending())
             <form action="{{ route('public.ban.appeal') }}" method="POST" class="flex flex-col gap-6 pt-2">
                 @csrf

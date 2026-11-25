@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="max-w-7xl mx-auto px-6 py-8 flex flex-col gap-14">
-    {{-- 1. Новые релизы альбомов --}}
+    
     <section class="flex flex-col gap-6">
         <div class="flex justify-between items-end">
             <div>
@@ -45,7 +45,7 @@
         </div>
     </section>
 
-    {{-- 2. Треки, которые стоит послушать (сетка из 3 колонок) --}}
+    
     <section id="featured-tracks" class="flex flex-col gap-6">
         <div>
             <h2 class="text-2xl md:text-3xl font-extrabold text-white">Треки, которые стоит послушать</h2>
@@ -62,7 +62,7 @@
                         data-track-cover="{{ $track->album?->cover_url ?? asset('images/default-cover.svg') }}"
                         data-track-duration="{{ $track->duration_ms ? (int)($track->duration_ms / 1000) : 0 }}">
                     <div class="flex items-center gap-3.5 min-w-0">
-                        {{-- Обложка от альбома --}}
+                        
                         <div class="w-12 h-12 rounded-xl overflow-hidden bg-gray-900 shrink-0 border border-gray-700/60">
                             <img src="{{ $track->album?->cover_url ?? asset('images/default-cover.svg') }}"
                                  alt="{{ $track->title }}"
@@ -113,24 +113,29 @@
                             </form>
                         @endauth
 
-                        {{-- Кнопка добавить в плейлист (если авторизован) --}}
+                        
                         @auth
                             @if(auth()->user()->playlists->isNotEmpty())
-                                <div class="relative group/menu">
-                                    <button type="button" class="text-gray-400 hover:text-white p-1.5 rounded-lg hover:bg-main-light/50 transition-colors" title="В плейлист">
+                                <div class="relative playlist-menu-container">
+                                    <button type="button" 
+                                            class="playlist-menu-btn text-gray-400 hover:text-white p-1.5 rounded-lg hover:bg-main-light/50 transition-colors cursor-pointer" 
+                                            title="В плейлист">
                                         +
                                     </button>
-                                    <div class="hidden group-hover/menu:block absolute right-0 bottom-full mb-2 w-48 bg-main-dark border border-gray-700 rounded-xl shadow-2xl z-50 p-1.5">
-                                        <div class="text-[10px] font-semibold text-gray-400 uppercase px-2 py-1">В плейлист:</div>
-                                        @foreach(auth()->user()->playlists as $p)
-                                            <form action="{{ route('public.playlists.tracks.add', $p) }}" method="POST">
-                                                @csrf
-                                                <input type="hidden" name="track_id" value="{{ $track->id }}">
-                                                <button type="submit" class="w-full text-left px-2 py-1.5 text-xs text-gray-300 hover:text-white hover:bg-violet-600/30 rounded-lg truncate block">
-                                                    {{ $p->title }}
-                                                </button>
-                                            </form>
-                                        @endforeach
+                                    <div class="playlist-dropdown hidden absolute right-0 bottom-full pb-2 w-56 z-50">
+                                        <div class="bg-main-dark border border-gray-700 rounded-xl shadow-2xl p-2 max-h-60 overflow-y-auto">
+                                            <div class="text-[10px] font-semibold text-gray-400 uppercase px-2 py-1">В плейлист:</div>
+                                            @foreach(auth()->user()->playlists as $p)
+                                                <form action="{{ route('public.playlists.tracks.add', $p) }}" method="POST">
+                                                    @csrf
+                                                    <input type="hidden" name="track_id" value="{{ $track->id }}">
+                                                    <button type="submit" 
+                                                            class="w-full text-left px-2 py-1.5 text-xs text-gray-300 hover:text-white hover:bg-violet-600/30 rounded-lg truncate block transition-colors cursor-pointer">
+                                                        {{ $p->title }}
+                                                    </button>
+                                                </form>
+                                            @endforeach
+                                        </div>
                                     </div>
                                 </div>
                             @endif
@@ -145,7 +150,7 @@
         </div>
     </section>
 
-    {{-- 3. Популярные авторы --}}
+    
     <section class="flex flex-col gap-6">
         <div>
             <h2 class="text-2xl md:text-3xl font-extrabold text-white">Легендарные авторы</h2>

@@ -12,15 +12,15 @@
     </div>
 
     <div class="bg-main-dark border border-gray-800 p-8 rounded-3xl shadow-xl">
-        {{-- ВАЖНО: enctype="multipart/form-data" обязателен для загрузки файлов --}}
+        
         <form action="{{ route('admin.authors.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
             @csrf
 
-            {{-- Изображение / Фото автора --}}
+            
             <div>
                 <label class="block text-sm font-medium text-gray-300 mb-2">Фотография / Аватар</label>
                 <div class="flex items-center gap-5">
-                    {{-- Поле выбора файла --}}
+                    
                     <div class="flex-1">
                         <input type="file" id="image" name="image" accept="image/*"
                                class="block w-full text-sm text-gray-400 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-gray-800 file:text-gray-200 hover:file:bg-gray-700 file:transition-colors file:cursor-pointer cursor-pointer border border-gray-700 rounded-xl bg-main-light focus:outline-none focus:border-violet-500">
@@ -30,7 +30,7 @@
                 </div>
             </div>
 
-            {{-- Имя автора --}}
+            
             <div>
                 <label for="name" class="block text-sm font-medium text-gray-300 mb-2">Имя / Псевдоним автора *</label>
                 <input type="text" id="name" name="name" value="{{ old('name') }}" required
@@ -39,7 +39,7 @@
                 @error('name') <p class="text-red-400 text-xs mt-1">{{ $message }}</p> @enderror
             </div>
 
-            {{-- Биография --}}
+            
             <div>
                 <label for="bio" class="block text-sm font-medium text-gray-300 mb-2">Биография / Описание</label>
                 <textarea id="bio" name="bio" rows="5"
@@ -48,7 +48,7 @@
                 @error('bio') <p class="text-red-400 text-xs mt-1">{{ $message }}</p> @enderror
             </div>
 
-            {{-- Кнопки --}}
+            
             <div class="flex items-center justify-end gap-4 pt-4 border-t border-gray-800">
                 <a href="{{ route('admin.authors.index') }}" class="px-5 py-2.5 text-sm text-gray-400 hover:text-white transition-colors">
                     Отмена

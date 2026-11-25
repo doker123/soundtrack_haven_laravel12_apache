@@ -15,7 +15,7 @@
         <form action="{{ route('admin.tracks.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
             @csrf
 
-            {{-- Название --}}
+            
             <div>
                 <label for="title" class="block text-sm font-medium text-gray-300 mb-2">Название трека *</label>
                 <input type="text" id="title" name="title" value="{{ old('title') }}" required
@@ -24,7 +24,7 @@
                 @error('title') <p class="text-red-400 text-xs mt-1">{{ $message }}</p> @enderror
             </div>
 
-            {{-- Сетка: Автор и Альбом --}}
+            
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                     <label for="author_id" class="block text-sm font-medium text-gray-300 mb-2">Автор (композитор) *</label>
@@ -55,7 +55,7 @@
                 </div>
             </div>
 
-            {{-- Статус публикации --}}
+            
             <div>
                 <label for="status_id" class="block text-sm font-medium text-gray-300 mb-2">Статус *</label>
                 <select id="status_id" name="status_id" required 
@@ -69,7 +69,7 @@
                 @error('status_id') <p class="text-red-400 text-xs mt-1">{{ $message }}</p> @enderror
             </div>
 
-            {{-- Аудиофайл --}}
+            
             <div>
                 <label for="audio" class="block text-sm font-medium text-gray-300 mb-2">Аудиофайл *</label>
                 <input type="file" id="audio" name="audio" accept="audio/mp3, audio/wav, audio/ogg, audio/flac" required
@@ -78,7 +78,7 @@
                 @error('audio') <p class="text-red-400 text-xs mt-1">{{ $message }}</p> @enderror
             </div>
 
-            {{-- Кнопки --}}
+            
             <div class="flex items-center justify-end gap-4 pt-4 border-t border-gray-800">
                 <a href="{{ route('admin.tracks.index') }}" class="px-5 py-2.5 text-sm text-gray-400 hover:text-white transition-colors">
                     Отмена

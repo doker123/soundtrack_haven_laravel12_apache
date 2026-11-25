@@ -24,7 +24,7 @@
 
     <div class="bg-main-dark border border-gray-800 p-8 rounded-3xl shadow-xl">
         <div class="flex flex-col sm:flex-row gap-6 items-center sm:items-start mb-6">
-            {{-- Обложка альбома или дефолтная --}}
+            
             <img src="{{ $track->album?->cover_url ?? asset('img/default-cover.png') }}" 
                  alt="{{ $track->title }}" 
                  class="w-44 h-44 rounded-2xl object-cover shadow-xl border border-gray-700 bg-gray-900 shrink-0">

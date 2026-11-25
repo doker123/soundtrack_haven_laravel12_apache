@@ -5,7 +5,7 @@
 @section('content')
 <div class="max-w-7xl mx-auto px-6 py-10 flex flex-col gap-8">
 
-    {{-- Поисковая форма --}}
+    
     <div class="flex flex-col gap-4">
         <h1 class="text-3xl font-extrabold text-white">Поиск</h1>
         <form action="{{ route('search') }}" method="GET" class="relative max-w-2xl">
@@ -34,7 +34,7 @@
     </div>
 
     @if($query !== '' && mb_strlen($query) >= 2)
-        {{-- Вкладки фильтрации --}}
+        
         <div class="flex items-center gap-2 overflow-x-auto pb-2 border-b border-gray-800 text-sm font-medium">
             <a href="{{ route('search', ['q' => $query, 'type' => 'all']) }}"
                class="px-4 py-2 rounded-xl transition-all whitespace-nowrap flex items-center gap-2 {{ $type === 'all' ? 'bg-violet-600 text-white shadow-md' : 'bg-main-dark text-gray-400 hover:text-white hover:bg-gray-800' }}">
@@ -79,7 +79,7 @@
     @endif
 
     @if($query === '' || mb_strlen($query) < 2)
-        {{-- Подсказка при пустом запросе --}}
+        
         <div class="py-16 text-center text-gray-500 bg-main-dark border border-gray-800 rounded-3xl flex flex-col items-center">
             <div class="w-16 h-16 rounded-2xl bg-gray-900 border border-gray-800 flex items-center justify-center text-gray-400 mb-4">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -90,7 +90,7 @@
             <p class="text-xs text-gray-600 mt-1">Ищите музыку, авторов, саундтреки к играм и плейлисты</p>
         </div>
     @elseif($counts['total'] === 0)
-        {{-- Ничего не найдено --}}
+        
         <div class="py-16 text-center text-gray-500 bg-main-dark border border-gray-800 rounded-3xl flex flex-col items-center">
             <div class="w-16 h-16 rounded-2xl bg-gray-900 border border-gray-800 flex items-center justify-center text-gray-400 mb-4">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -102,7 +102,7 @@
         </div>
     @else
 
-        {{-- 1. Секция: Треки --}}
+        
         @if(($type === 'all' || $type === 'tracks') && $tracks->isNotEmpty())
             <section class="flex flex-col gap-4">
                 <div class="flex items-center justify-between">
@@ -161,7 +161,7 @@
             </section>
         @endif
 
-        {{-- 2. Секция: Альбомы --}}
+        
         @if(($type === 'all' || $type === 'albums') && $albums->isNotEmpty())
             <section class="flex flex-col gap-4">
                 <div class="flex items-center justify-between">
@@ -208,7 +208,7 @@
             </section>
         @endif
 
-        {{-- 3. Секция: Авторы --}}
+        
         @if(($type === 'all' || $type === 'authors') && $authors->isNotEmpty())
             <section class="flex flex-col gap-4">
                 <div class="flex items-center justify-between">
@@ -252,7 +252,7 @@
             </section>
         @endif
 
-        {{-- 4. Секция: Плейлисты --}}
+        
         @if(($type === 'all' || $type === 'playlists') && $playlists->isNotEmpty())
             <section class="flex flex-col gap-4">
                 <div class="flex items-center justify-between">

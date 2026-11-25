@@ -1,126 +1,148 @@
 @extends('layouts.app')
 
-@section('title', 'Пользовательское соглашение — SoundtrackHaven')
+@section('title', 'Пользовательское соглашение — Soundtrack Haven')
 
 @section('content')
-<h1>Пользовательское соглашение</h1>
-<ol>
-    <li>
-        <span class="section-title">Общие положения</span>
-        <ol>
-            <li>Используя данный Сайт, Пользователь выражает полное и безоговорочное согласие с условиями настоящего
-                Соглашения.
-            </li>
-            <li>Настоящее Соглашение может быть изменено администрацией Сайта без предварительного уведомления.
-                Новая редакция Соглашения вступает в силу с момента её публикации на Сайте, если иное не
-                предусмотрено новой редакцией.
-            </li>
-            <li>Пользователь несёт ответственность за соблюдение положений настоящего Соглашения, а также
-                применимого законодательства своей страны.
-            </li>
-        </ol>
-    </li>
+<div class="max-w-4xl mx-auto px-6 py-12 flex flex-col gap-10">
 
-    <li>
-        <span class="section-title">Описание сервиса</span>
-        <ol>
-            <li>Сайт SoundtrackHaven предоставляет доступ к архиву саундтреков видеоигр, включая информацию о
-                композиторах, играх и контексте использования музыки.
-            </li>
-            <li>Сайт не предоставляет аудиофайлы для скачивания, а лишь ссылки на официальные источники или
-                интеграцию с публичными аудио-сервисами, если таковые имеются.
-            </li>
-            <li>Доступ к Сайту предоставляется на безвозмездной основе.</li>
-        </ol>
-    </li>
+    
+    <div class="border-b border-gray-800 pb-8 flex flex-col gap-3">
+        <div class="inline-flex items-center gap-2 text-xs font-semibold text-violet-400 uppercase tracking-widest bg-violet-950/40 border border-violet-500/20 px-3 py-1 rounded-full w-fit">
+            Юридическая информация
+        </div>
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+            Пользовательское соглашение
+        </h1>
+        <p class="text-sm text-gray-400">
+            Редакция действует с момента публикации. Пожалуйста, внимательно ознакомьтесь с условиями использования платформы Soundtrack Haven.
+        </p>
+    </div>
 
-    <li>
-        <span class="section-title">Права и обязанности Пользователя</span>
-        <ol>
-            <li>Пользователь обязуется использовать Сайт исключительно в законных целях и не нарушать права третьих
-                лиц.
-            </li>
-            <li>Запрещено:
-                <ol>
-                    <li>Использовать автоматизированные скрипты и боты для сбора данных с Сайта без разрешения
-                        администрации.
-                    </li>
-                    <li>Пытаться получить доступ к защищённым частям Сайта, если это не предусмотрено интерфейсом.
-                    </li>
-                    <li>Публиковать или распространять незаконный, клеветнический, оскорбительный или иным образом
-                        противоречащий закону контент.
-                    </li>
-                    <li>Использовать Сайт в коммерческих целях без письменного разрешения администрации.</li>
-                </ol>
-            </li>
-            <li>Пользователь несёт личную ответственность за свои действия на Сайте.</li>
-        </ol>
-    </li>
+    
+    <div class="flex flex-col gap-6">
 
-    <li>
-        <span class="section-title">Права администрации</span>
-        <ol>
-            <li>Администрация Сайта имеет право в любое время изменить, приостановить или прекратить работу Сайта
-                без предварительного уведомления.
-            </li>
-            <li>Администрация оставляет за собой право удалить или ограничить доступ к любому контенту, размещённому
-                на Сайте, если он противоречит настоящему Соглашению или законодательству.
-            </li>
-            <li>Администрация не несёт ответственности за точность и актуальность информации, предоставленной
-                третьими лицами.
-            </li>
-        </ol>
-    </li>
+        
+        <section class="bg-main-dark border border-gray-800 rounded-2xl p-6 sm:p-7 flex flex-col gap-4 shadow-lg">
+            <div class="flex items-center gap-3">
+                <span class="w-8 h-8 rounded-xl bg-violet-950/60 border border-violet-500/30 text-violet-400 text-sm font-bold flex items-center justify-center shrink-0">
+                    1
+                </span>
+                <h2 class="text-lg font-bold text-white">Общие положения</h2>
+            </div>
+            <ul class="text-sm text-gray-300 leading-relaxed space-y-2.5 list-disc list-inside marker:text-violet-500">
+                <li>Используя данный Сайт, Пользователь выражает полное и безоговорочное согласие с условиями настоящего Соглашения.</li>
+                <li>Настоящее Соглашение может быть изменено администрацией Сайта без предварительного уведомления. Новая редакция Соглашения вступает в силу с момента её публикации на Сайте, если иное не предусмотрено новой редакцией.</li>
+                <li>Пользователь несёт ответственность за соблюдение положений настоящего Соглашения, а также применимого законодательства своей страны.</li>
+            </ul>
+        </section>
 
-    <li>
-        <span class="section-title">Интеллектуальная собственность</span>
-        <ol>
-            <li>Все материалы, размещённые на Сайте, включая тексты, изображения, аудио, дизайн и программный код,
-                являются объектами интеллектуальной собственности их правообладателей.
-            </li>
-            <li>Использование материалов Сайта возможно только в личных, некоммерческих целях, при условии
-                сохранения всех упоминаний об авторстве.
-            </li>
-            <li>Любое копирование, распространение или иное использование материалов возможно только с письменного
-                разрешения администрации Сайта или правообладателя.
-            </li>
-        </ol>
-    </li>
+        
+        <section class="bg-main-dark border border-gray-800 rounded-2xl p-6 sm:p-7 flex flex-col gap-4 shadow-lg">
+            <div class="flex items-center gap-3">
+                <span class="w-8 h-8 rounded-xl bg-violet-950/60 border border-violet-500/30 text-violet-400 text-sm font-bold flex items-center justify-center shrink-0">
+                    2
+                </span>
+                <h2 class="text-lg font-bold text-white">Описание сервиса</h2>
+            </div>
+            <ul class="text-sm text-gray-300 leading-relaxed space-y-2.5 list-disc list-inside marker:text-violet-500">
+                <li>Сайт Soundtrack Haven предоставляет доступ к каталогу саундтреков видеоигр, информации о композиторах, альбомах и контексте использования музыки.</li>
+                <li>Сайт предоставляет возможность прослушивания композиций в ознакомительных целях, а также создания пользовательских плейлистов и списков избранного.</li>
+                <li>Базовый доступ к возможностям Сайта предоставляется на безвозмездной основе.</li>
+            </ul>
+        </section>
 
-    <li>
-        <span class="section-title">Ограничение ответственности</span>
-        <ol>
-            <li>Сайт предоставляется на условиях «как есть» без каких-либо гарантий.</li>
-            <li>Администрация не несёт ответственности за ущерб, причинённый использованию или невозможности
-                использования Сайта.
-            </li>
-            <li>Сайт может содержать ссылки на внешние ресурсы. Администрация не несёт ответственности за содержание
-                и доступность таких ресурсов.
-            </li>
-        </ol>
-    </li>
+        
+        <section class="bg-main-dark border border-gray-800 rounded-2xl p-6 sm:p-7 flex flex-col gap-4 shadow-lg">
+            <div class="flex items-center gap-3">
+                <span class="w-8 h-8 rounded-xl bg-violet-950/60 border border-violet-500/30 text-violet-400 text-sm font-bold flex items-center justify-center shrink-0">
+                    3
+                </span>
+                <h2 class="text-lg font-bold text-white">Права и обязанности Пользователя</h2>
+            </div>
+            <p class="text-sm text-gray-300">
+                Пользователь обязуется использовать Сайт исключительно в законных целях и не нарушать права третьих лиц.
+            </p>
+            <div class="bg-gray-900/60 border border-gray-800 rounded-xl p-4 flex flex-col gap-2">
+                <span class="text-xs font-semibold text-rose-400 uppercase tracking-wider">Категорически запрещено:</span>
+                <ul class="text-xs sm:text-sm text-gray-400 space-y-1.5 list-disc list-inside marker:text-rose-500">
+                    <li>Использовать автоматизированные скрипты, парсеры и боты для сбора данных без письменного разрешения администрации.</li>
+                    <li>Предпринимать попытки обхода защиты, вмешательства в работу серверной инфраструктуры и API Сайта.</li>
+                    <li>Публиковать или передавать вредоносный, оскорбительный, клеветнический или противоправный контент.</li>
+                    <li>Использовать материалы и функции Сайта в коммерческих целях без согласования с правообладателями.</li>
+                </ul>
+            </div>
+            <p class="text-xs text-gray-400">
+                Пользователь несёт личную ответственность за сохранность данных своей учетной записи и любые действия, совершенные под его аккаунтом.
+            </p>
+        </section>
 
-    <li>
-        <span class="section-title">Применимое право и разрешение споров</span>
-        <ol>
-            <li>К отношениям, возникающим из настоящего Соглашения, применяется законодательство Российской
-                Федерации.
-            </li>
-            <li>Все споры подлежат разрешению в порядке, установленном действующим законодательством.</li>
-            <li>Если спор не может быть разрешён в досудебном порядке, он передаётся в суд по месту нахождения
-                администрации Сайта.
-            </li>
-        </ol>
-    </li>
+        
+        <section class="bg-main-dark border border-gray-800 rounded-2xl p-6 sm:p-7 flex flex-col gap-4 shadow-lg">
+            <div class="flex items-center gap-3">
+                <span class="w-8 h-8 rounded-xl bg-violet-950/60 border border-violet-500/30 text-violet-400 text-sm font-bold flex items-center justify-center shrink-0">
+                    4
+                </span>
+                <h2 class="text-lg font-bold text-white">Права администрации</h2>
+            </div>
+            <ul class="text-sm text-gray-300 leading-relaxed space-y-2.5 list-disc list-inside marker:text-violet-500">
+                <li>Администрация имеет право в любое время изменять структуру, оформление и функционал Сайта без предварительного предупреждения.</li>
+                <li>Администрация оставляет за собой право блокировать аккаунты пользователей, нарушающих условия настоящего Соглашения, а также удалять неприемлемый контент.</li>
+                <li>Администрация вправе вводить технические перерывы для проведения регламентных и профилактических работ.</li>
+            </ul>
+        </section>
 
-    <li>
-        <span class="section-title">Заключительные положения</span>
-        <ol>
-            <li>Настоящее Соглашение вступает в силу с момента начала использования Сайта Пользователем.</li>
-            <li>Если какое-либо положение настоящего Соглашения будет признано недействительным, остальные положения
-                сохраняют свою силу.
-            </li>
-        </ol>
-    </li>
-</ol>
+        
+        <section class="bg-main-dark border border-gray-800 rounded-2xl p-6 sm:p-7 flex flex-col gap-4 shadow-lg">
+            <div class="flex items-center gap-3">
+                <span class="w-8 h-8 rounded-xl bg-violet-950/60 border border-violet-500/30 text-violet-400 text-sm font-bold flex items-center justify-center shrink-0">
+                    5
+                </span>
+                <h2 class="text-lg font-bold text-white">Интеллектуальная собственность</h2>
+            </div>
+            <ul class="text-sm text-gray-300 leading-relaxed space-y-2.5 list-disc list-inside marker:text-violet-500">
+                <li>Все музыкальные произведения, названия игр, логотипы, торговые марки и графические материалы принадлежат их законным авторам и правообладателям.</li>
+                <li>Материалы представлены на Сайте исключительно для частного домашнего прослушивания и ознакомления.</li>
+                <li>Дизайн, программный код и элементы структуры интерфейса Soundtrack Haven охраняются авторским правом.</li>
+            </ul>
+        </section>
+
+        
+        <section class="bg-main-dark border border-gray-800 rounded-2xl p-6 sm:p-7 flex flex-col gap-4 shadow-lg">
+            <div class="flex items-center gap-3">
+                <span class="w-8 h-8 rounded-xl bg-violet-950/60 border border-violet-500/30 text-violet-400 text-sm font-bold flex items-center justify-center shrink-0">
+                    6
+                </span>
+                <h2 class="text-lg font-bold text-white">Ограничение ответственности</h2>
+            </div>
+            <ul class="text-sm text-gray-300 leading-relaxed space-y-2.5 list-disc list-inside marker:text-violet-500">
+                <li>Сервис предоставляется по принципу «как есть» (as is). Администрация не гарантирует бесперебойную и безошибочную работу всех служб.</li>
+                <li>Администрация не несёт ответственности за возможные перебои в доступе, потерю пользовательских настроек или сторонние ссылки.</li>
+            </ul>
+        </section>
+
+        
+        <section class="bg-main-dark border border-gray-800 rounded-2xl p-6 sm:p-7 flex flex-col gap-4 shadow-lg">
+            <div class="flex items-center gap-3">
+                <span class="w-8 h-8 rounded-xl bg-violet-950/60 border border-violet-500/30 text-violet-400 text-sm font-bold flex items-center justify-center shrink-0">
+                    7
+                </span>
+                <h2 class="text-lg font-bold text-white">Заключительные положения</h2>
+            </div>
+            <ul class="text-sm text-gray-300 leading-relaxed space-y-2.5 list-disc list-inside marker:text-violet-500">
+                <li>Настоящее Соглашение вступает в силу с момента первого посещения или использования любого сервиса Сайта Пользователем.</li>
+                <li>Признание отдельных пунктов настоящего документа недействительными не отменяет действие остальных его положений.</li>
+            </ul>
+        </section>
+
+    </div>
+
+    
+    <div class="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500 border-t border-gray-800/80">
+        <span>© {{ date('Y') }} Soundtrack Haven. Все права защищены.</span>
+        <a href="{{ route('home') }}" class="text-violet-400 hover:text-violet-300 font-semibold transition-colors flex items-center gap-1">
+            <span>← Вернуться на главную</span>
+        </a>
+    </div>
+
+</div>
 @endsection

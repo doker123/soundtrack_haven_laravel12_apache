@@ -40,12 +40,13 @@
             </div>
         @endcan
 
+        <a href="{{ route('search') }}" class="hover:text-[#6d5898] active:text-[#5825b5] transition-colors uppercase tracking-wider">
+            Поиск
+        </a>
+
         @auth
         <a href="{{route('public.favorites.index')}}" class="hover:text-[#6d5898] active:text-[#5825b5] transition-colors uppercase tracking-wider">
             Избранное
-        </a>
-        <a href="{{ route('search') }}" class="hover:text-[#6d5898] active:text-[#5825b5] transition-colors uppercase tracking-wider">
-            Поиск
         </a>
         <a href="{{route('public.playlists.index')}}" class="hover:text-[#6d5898] active:text-[#5825b5] transition-colors uppercase tracking-wider">
             Плейлисты
@@ -56,7 +57,7 @@
         @endauth
     </nav>
 
-    {{-- Профиль и Выход (В правом углу) --}}
+    
     <div class="shrink-0 flex items-center gap-4">
         @auth
             <a href="{{route('public.settings.edit')}}" class="hover:underline text-sm tracking-wide block max-w-30 truncate">

@@ -5,13 +5,13 @@
 @section('content')
 <div class="max-w-5xl mx-auto px-6 py-10">
 
-    {{-- Заголовок --}}
+    
     <div class="mb-8">
         <h1 class="text-3xl font-extrabold text-white">История прослушиваний</h1>
         <p class="text-sm text-gray-400 mt-1">Все треки, которые вы слушали</p>
     </div>
 
-    {{-- Статистика --}}
+    
     <div class="grid grid-cols-3 gap-4 mb-10">
         <div class="bg-main-dark border border-gray-800 rounded-2xl p-5 flex flex-col gap-1">
             <span class="text-3xl font-extrabold text-violet-400">{{ number_format($totalPlays) }}</span>
@@ -34,7 +34,7 @@
         </div>
     </div>
 
-    {{-- Список треков --}}
+    
     <div class="flex flex-col gap-2">
         @forelse($history as $entry)
             @php
@@ -50,14 +50,14 @@
                  data-track-cover="{{ $track->album?->cover_url ?? asset('images/default-cover.svg') }}"
                  data-track-duration="{{ $track->duration_ms ? (int)($track->duration_ms / 1000) : 0 }}">
 
-                {{-- Обложка --}}
+                
                 <div class="w-12 h-12 rounded-xl overflow-hidden bg-gray-900 shrink-0 border border-gray-700/60">
                     <img src="{{ $track->album?->cover_url ?? asset('images/default-cover.svg') }}"
                          alt="{{ $track->title }}"
                          class="w-full h-full object-cover">
                 </div>
 
-                {{-- Название и автор --}}
+                
                 <div class="flex-1 min-w-0">
                     <h4 class="font-semibold text-white text-sm truncate group-hover:text-violet-300 transition-colors">
                         {{ $track->title }}
@@ -69,7 +69,7 @@
                         @endif
                     </p>
 
-                    {{-- Прогресс-бар прослушивания --}}
+                    
                     <div class="mt-1.5 flex items-center gap-2">
                         <div class="flex-1 h-1 bg-gray-700 rounded-full overflow-hidden">
                             <div class="h-full bg-violet-500 rounded-full transition-all"
@@ -79,7 +79,7 @@
                     </div>
                 </div>
 
-                {{-- Время и дата --}}
+                
                 <div class="shrink-0 text-right flex flex-col items-end gap-1">
                     <span class="text-xs font-mono text-gray-500">
                         {{ $track->duration_ms ? gmdate('i:s', (int)($track->duration_ms / 1000)) : '—' }}
@@ -106,7 +106,7 @@
         @endforelse
     </div>
 
-    {{-- Пагинация --}}
+    
     @if($history->hasPages())
         <div class="mt-8">
             {{ $history->links() }}

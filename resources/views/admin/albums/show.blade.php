@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="max-w-6xl mx-auto px-6 py-10">
-    {{-- Навигация и действия --}}
+    
     <div class="flex items-center justify-between mb-6">
         <a href="{{ route('admin.albums.index') }}" class="text-sm text-gray-400 hover:text-white transition-colors">
             ← Назад к списку альбомов
@@ -23,7 +23,7 @@
         </div>
     </div>
 
-    {{-- Карточка альбома --}}
+    
     <div class="flex flex-col md:flex-row gap-8 items-start bg-main-dark border border-gray-800 p-8 rounded-3xl mb-8 shadow-xl">
         <img src="{{ $album->cover_url }}" alt="{{ $album->title }}" class="w-56 h-56 object-cover rounded-2xl shadow-xl shrink-0 border border-gray-700 bg-gray-900">
         <div class="flex-1">
@@ -47,7 +47,7 @@
         </div>
     </div>
 
-    {{-- Список треков альбома на CSS Grid --}}
+    
     <div class="bg-main-dark border border-gray-800 rounded-3xl overflow-hidden shadow-xl">
         <div class="flex justify-between items-center p-6 border-b border-gray-800">
             <h2 class="text-xl font-bold text-white">Треки альбома</h2>
@@ -56,7 +56,7 @@
             </a>
         </div>
 
-        {{-- Заголовок Grid-таблицы треков --}}
+        
         <div class="hidden md:grid grid-cols-12 gap-4 items-center px-6 py-3.5 bg-main-light/40 text-xs font-semibold text-gray-400 uppercase tracking-wider border-b border-gray-800">
             <div class="col-span-1 text-center">#</div>
             <div class="col-span-7">Название трека</div>
@@ -64,7 +64,7 @@
             <div class="col-span-2 text-right">Действия</div>
         </div>
 
-        {{-- Строки треков --}}
+        
         <div class="divide-y divide-gray-800/80">
             @forelse($album->tracks as $index => $track)
                 <div class="grid grid-cols-2 md:grid-cols-12 gap-4 items-center px-6 py-3 hover:bg-main-light/30 transition-colors text-sm">

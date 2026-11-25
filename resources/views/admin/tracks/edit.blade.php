@@ -16,7 +16,7 @@
             @csrf
             @method('PUT')
 
-            {{-- Название --}}
+            
             <div>
                 <label for="title" class="block text-sm font-medium text-gray-300 mb-2">Название трека *</label>
                 <input type="text" id="title" name="title" value="{{ old('title', $track->title) }}" required
@@ -24,7 +24,7 @@
                 @error('title') <p class="text-red-400 text-xs mt-1">{{ $message }}</p> @enderror
             </div>
 
-            {{-- Сетка: Автор и Альбом --}}
+            
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                     <label for="author_id" class="block text-sm font-medium text-gray-300 mb-2">Автор *</label>
@@ -54,7 +54,7 @@
                 </div>
             </div>
 
-            {{-- Статус --}}
+            
             <div>
                 <label for="status_id" class="block text-sm font-medium text-gray-300 mb-2">Статус *</label>
                 <select id="status_id" name="status_id" required 
@@ -68,7 +68,7 @@
                 @error('status_id') <p class="text-red-400 text-xs mt-1">{{ $message }}</p> @enderror
             </div>
 
-            {{-- Замена аудиофайла --}}
+            
             <div>
                 <label for="audio" class="block text-sm font-medium text-gray-300 mb-2">Заменить аудиофайл</label>
                 
@@ -89,7 +89,7 @@
                 @error('audio') <p class="text-red-400 text-xs mt-1">{{ $message }}</p> @enderror
             </div>
 
-            {{-- Кнопки --}}
+            
             <div class="flex items-center justify-end gap-4 pt-4 border-t border-gray-800">
                 <a href="{{ route('admin.tracks.index') }}" class="px-5 py-2.5 text-sm text-gray-400 hover:text-white transition-colors">
                     Отмена

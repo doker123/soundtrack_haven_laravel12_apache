@@ -1,17 +1,13 @@
 <div id="audio-player-bar" class="hidden fixed bottom-0 left-0 right-0 z-50 h-20 bg-player-bg flex items-center justify-around w-full gap-4 shadow-2xl border-t border-gray-800/80 transition-all duration-300">
-    <!-- 1. ЗОНА СЛЕВА (Трек) -->
         <div class="flex items-center gap-3 w-1/4 min-w-50">
             <img id="album-cover" class="w-12 h-12 rounded-xl object-cover shrink-0" src="{{asset('images/default-avatar.svg')}}" alt="Cover">
             <div class="min-w-0 flex-1 flex-col gap-4 ">
                 <p id="player-title" class="font-bold text-white text-sm truncate" title="Название трека">
-
                 </p>
                 <p id="player-artist" class="text-xs text-gray-200 truncate mt-0.5" >
-
                 </p>
             </div>
         </div>
-        <!-- 2. ЗОНА ПО ЦЕНТРУ (Управление) -->
         <div class="flex gap-4 flex-col items-center justify-center flex-1 w-full">
             <div class="flex gap-4 items-center justify-center flex-1 w-full">
                 <input type="range"
@@ -46,7 +42,6 @@
                 </button>
             </div>
         </div>
-        <!-- 3. ЗОНА СПРАВА (Громкость) -->
         <div class="flex items-center justify-end w-1/4 min-w-[160px] gap-2.5 mr-6">
             <button id="volume-btn" type="button" class="cursor-pointer p-1 text-gray-400 hover:text-white transition" title="Звук">
                 <img id="volume-0-btn-img" class="hidden w-5 h-5 pointer-events-none" src="{{asset('images/player_buttons/volume0.svg')}}" alt="mute">

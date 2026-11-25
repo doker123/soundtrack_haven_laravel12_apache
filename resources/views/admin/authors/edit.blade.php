@@ -16,7 +16,7 @@
             @csrf
             @method('PUT')
 
-            {{-- Имя --}}
+            
             <div>
                 <label for="name" class="block text-sm font-medium text-gray-300 mb-2">Имя автора *</label>
                 <input type="text" id="name" name="name" value="{{ old('name', $author->name) }}" required
@@ -24,7 +24,7 @@
                 @error('name') <p class="text-red-400 text-xs mt-1">{{ $message }}</p> @enderror
             </div>
 
-            {{-- Биография --}}
+            
             <div>
                 <label for="bio" class="block text-sm font-medium text-gray-300 mb-2">Биография</label>
                 <textarea id="bio" name="bio" rows="5"
@@ -32,7 +32,7 @@
                 @error('bio') <p class="text-red-400 text-xs mt-1">{{ $message }}</p> @enderror
             </div>
 
-            {{-- Кнопки --}}
+            
             <div class="flex items-center justify-end gap-4 pt-4 border-t border-gray-800">
                 <a href="{{ route('admin.authors.index') }}" class="px-5 py-2.5 text-sm text-gray-400 hover:text-white transition-colors">
                     Отмена

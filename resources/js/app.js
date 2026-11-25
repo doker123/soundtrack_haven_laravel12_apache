@@ -7,6 +7,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 1. Обычный клик по конкретному треку
     document.addEventListener("click", (e) => {
+        // Если кликнули по кнопке добавления в плейлист или внутри меню — не воспроизводить трек
+        if (e.target.closest(".playlist-menu-container") || e.target.closest("button") || e.target.closest("form")) {
+            return;
+        }
+
         const trackBtn = e.target.closest("[data-track-url]");
         if (!trackBtn) return;
 
@@ -78,4 +83,44 @@ document.addEventListener("DOMContentLoaded", () => {
             player.loadTrack(player.queue[0]);
         });
     }
+
+    // 4. Логика меню добавления в плейлист (только по нажатию)
+    let activeDropdown = null;
+
+    document.addEventListener("click", (e) => {
+        const btn = e.target.closest(".playlist-menu-btn");
+        if (btn) {
+            e.stopPropagation();
+            const container = btn.closest(".playlist-menu-container");
+            const dropdown = container?.querySelector(".playlist-dropdown");
+            if (dropdown) {
+                // Если открыто другое меню — закрываем его
+                if (activeDropdown && activeDropdown !== dropdown) {
+                    activeDropdown.classList.add("hidden");
+                }
+
+                const isHidden = dropdown.classList.contains("hidden");
+                if (isHidden) {
+                    dropdown.classList.remove("hidden");
+                    activeDropdown = dropdown;
+                } else {
+                    dropdown.classList.add("hidden");
+                    activeDropdown = null;
+                }
+            }
+            return;
+        }
+
+        // Если клик внутри выпадающего списка — не закрываем и не запускаем трек
+        if (e.target.closest(".playlist-dropdown")) {
+            e.stopPropagation();
+            return;
+        }
+
+        // Клик в любое другое место страницы — закрываем активное меню
+        if (activeDropdown) {
+            activeDropdown.classList.add("hidden");
+            activeDropdown = null;
+        }
+    });
 });

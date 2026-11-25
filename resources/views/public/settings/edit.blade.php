@@ -11,7 +11,7 @@
         </div>
 
         <div class="flex flex-col gap-4">
-            {{-- 1. Карточка Аватара --}}
+            
             <div class="bg-main-dark border border-gray-800 rounded-3xl p-6 md:p-8 shadow-xl">
                 <h2 class="text-lg font-bold text-white mb-4">Аватар профиля</h2>
 
@@ -57,7 +57,7 @@
                 </div>
             </div>
             <div class="grid grid-cols-3 gap-4">
-                {{-- 2. Карточка Никнейма --}}
+                
                 <div class="bg-main-dark border border-gray-800 rounded-3xl p-6 md:p-8 shadow-xl">
                     <h2 class="text-lg font-bold text-white mb-4">Никнейм</h2>
 
@@ -91,7 +91,7 @@
                     </form>
                 </div>
 
-                {{-- 3. Карточка Email --}}
+                
                 <div class="bg-main-dark border border-gray-800 rounded-3xl p-6 md:p-8 shadow-xl">
                     <h2 class="text-lg font-bold text-white mb-4">Электронная почта</h2>
 
@@ -125,7 +125,7 @@
                     </form>
                 </div>
 
-                {{-- 4. Карточка Пароля --}}
+                
                 <div class="bg-main-dark border border-gray-800 rounded-3xl p-6 md:p-8 shadow-xl">
                     <h2 class="text-lg font-bold text-white mb-4">Безопасность (Смена пароля)</h2>
 

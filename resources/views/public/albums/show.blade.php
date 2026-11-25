@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="max-w-7xl mx-auto px-6 py-8 flex flex-col gap-8">
-    {{-- Шапка альбома --}}
+    
     <div class="flex flex-col md:flex-row items-center md:items-end gap-6 bg-main-dark border border-gray-800 rounded-3xl p-6">
         <img src="{{ $album->cover_url }}" alt="{{ $album->title }}" class="w-48 h-48 rounded-2xl object-cover shadow-2xl">
         <div class="flex flex-col gap-2">
@@ -26,7 +26,7 @@
         </div>
     </div>
 
-    {{-- Список треков --}}
+    
     <div class="flex flex-col gap-2">
         @forelse($album->tracks as $index => $track)
             <div class="bg-main-dark border border-gray-800 hover:border-violet-500/40 rounded-2xl p-3 flex items-center justify-between transition-colors group cursor-pointer"
@@ -75,7 +75,7 @@
                             </button>
                         </form>
                     @endauth
-                    {{-- Кнопка добавить в плейлист (если авторизован) --}}
+                    
                     @auth
                         @if(auth()->user()->playlists->isNotEmpty())
                             <div class="relative group/menu">

@@ -22,7 +22,7 @@
         </div>
     </div>
 
-    {{-- Профиль автора --}}
+    
     <div class="flex flex-col sm:flex-row gap-8 items-center sm:items-start bg-main-dark border border-gray-800 p-8 rounded-3xl mb-10 shadow-xl">
         <img src="{{ $author->image_url }}" alt="{{ $author->name }}"
             class="w-32 h-32 rounded-full object-cover border-4 border-violet-900 bg-gray-900 shrink-0 shadow-lg">
@@ -40,7 +40,7 @@
         </div>
     </div>
 
-    {{-- Сетка альбомов автора на CSS Grid --}}
+    
     <div class="flex justify-between items-center mb-6">
         <h2 class="text-2xl font-bold text-white">Альбомы автора</h2>
         <a href="{{ route('admin.albums.create') }}?author_id={{ $author->id }}" class="text-xs text-violet-400 hover:underline">

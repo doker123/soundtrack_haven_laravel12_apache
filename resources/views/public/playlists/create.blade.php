@@ -5,7 +5,7 @@
 @section('content')
 <div class="max-w-2xl mx-auto px-6 py-10">
 
-    {{-- Навигация назад --}}
+    
     <div class="mb-6">
         <a href="{{ route('public.playlists.index') }}"
            class="inline-flex items-center gap-1.5 text-xs text-gray-400 hover:text-white transition-colors">
@@ -14,12 +14,12 @@
         <h1 class="text-3xl font-extrabold text-white mt-2">Новый плейлист</h1>
     </div>
 
-    {{-- Карточка формы --}}
+    
     <div class="bg-main-dark border border-gray-800 p-8 rounded-3xl shadow-xl">
         <form action="{{ route('public.playlists.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
             @csrf
 
-            {{-- Название плейлиста --}}
+            
             <div>
                 <label for="title" class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
                     Название *
@@ -36,7 +36,7 @@
                 @enderror
             </div>
 
-            {{-- Описание --}}
+            
             <div>
                 <label for="description" class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
                     Описание
@@ -51,7 +51,7 @@
                 @enderror
             </div>
 
-            {{-- Обложка --}}
+            
             <div>
                 <label for="cover" class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
                     Обложка плейлиста
@@ -67,7 +67,7 @@
                 @enderror
             </div>
 
-            {{-- Чекбокс видимости (Публичный / Приватный) --}}
+            
             <div class="pt-2">
                 <label class="flex items-center gap-3 cursor-pointer select-none">
                     <input type="checkbox"
@@ -85,7 +85,7 @@
                 @enderror
             </div>
 
-            {{-- Кнопки действий --}}
+            
             <div class="flex items-center justify-end gap-3 pt-4 border-t border-gray-800">
                 <a href="{{ route('public.playlists.index') }}"
                    class="px-5 py-2.5 text-sm text-gray-400 hover:text-white transition-colors">
