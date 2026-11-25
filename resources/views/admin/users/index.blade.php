@@ -1,10 +1,7 @@
 @extends('layouts.app')
-
 @section('title', 'Админ: Пользователи')
-
 @section('content')
 <div class="max-w-7xl mx-auto px-6 py-10">
-
     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
         <div>
             <div class="flex items-center gap-2 text-xs text-violet-400 font-semibold uppercase tracking-wider mb-1">
@@ -15,8 +12,6 @@
             <h1 class="text-3xl font-extrabold text-white">Пользователи</h1>
         </div>
     </div>
-
-    
     @if(session('success'))
         <div class="mb-6 p-4 rounded-xl bg-emerald-950/60 border border-emerald-500/40 text-emerald-300 text-sm">
             {{ session('success') }}
@@ -27,12 +22,9 @@
             {{ session('error') }}
         </div>
     @endif
-
-    
     <form method="GET" action="{{ route('admin.users.index') }}"
           class="grid grid-cols-1 md:grid-cols-12 gap-3 mb-6
                  bg-main-dark border border-gray-800 rounded-2xl p-4 shadow-xl">
-
         <div class="md:col-span-6">
             <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1.5">
                 Поиск
@@ -43,7 +35,6 @@
                           text-sm text-white placeholder-gray-500
                           focus:border-violet-500 focus:outline-none">
         </div>
-
         <div class="md:col-span-3">
             <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1.5">
                 Роль
@@ -59,7 +50,6 @@
                 @endforeach
             </select>
         </div>
-
         <div class="md:col-span-3 grid grid-cols-2 gap-2 items-end">
             <button type="submit"
                     class="bg-[#6d5898] hover:bg-[#5825b5] text-white text-sm font-semibold
@@ -73,11 +63,7 @@
             </a>
         </div>
     </form>
-
-    
     <div class="bg-main-dark border border-gray-800 rounded-3xl overflow-hidden shadow-xl">
-
-        
         <div class="hidden md:grid grid-cols-12 gap-4 items-center px-6 py-4
                     bg-main-light/60 text-xs font-semibold text-gray-400 uppercase tracking-wider
                     border-b border-gray-800">
@@ -87,8 +73,6 @@
             <div class="col-span-3">Статус</div>
             <div class="col-span-2 text-right">Действия</div>
         </div>
-
-        
         <div class="divide-y divide-gray-800/80">
             @forelse($users as $user)
                 @php
@@ -96,16 +80,12 @@
                 @endphp
                 <div class="grid grid-cols-2 md:grid-cols-12 gap-4 items-center
                             px-6 py-3.5 hover:bg-main-light/30 transition-colors text-sm">
-
-                    
                     <div class="col-span-1">
                         <img src="{{ $user->avatar?->url ?? asset('images/default-avatar.svg') }}"
                              alt="{{ $user->name }}"
                              class="w-10 h-10 object-cover rounded-full
                                     border border-gray-700 bg-gray-900">
                     </div>
-
-                    
                     <div class="col-span-4 min-w-0">
                         <a href="{{ route('admin.users.show', $user) }}"
                            class="font-semibold text-white hover:text-violet-300 transition-colors truncate block">
@@ -113,16 +93,12 @@
                         </a>
                         <div class="text-xs text-gray-500 truncate">{{ $user->email }}</div>
                     </div>
-
-                    
                     <div class="col-span-2">
                         <span class="inline-block px-2.5 py-1 rounded-lg text-xs font-semibold
                                      bg-violet-950/60 text-violet-300 border border-violet-500/30">
                             {{ $user->role?->name ?? '—' }}
                         </span>
                     </div>
-
-                    
                     <div class="col-span-3">
                         @if($activeBan)
                             <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold
@@ -145,8 +121,6 @@
                             </span>
                         @endif
                     </div>
-
-                    
                     <div class="col-span-2 flex items-center justify-end gap-3">
                         <a href="{{ route('admin.users.show', $user) }}"
                            class="text-xs text-yellow-400 hover:text-yellow-300 hover:underline">

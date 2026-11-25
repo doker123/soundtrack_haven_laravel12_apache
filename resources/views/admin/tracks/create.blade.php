@@ -1,7 +1,5 @@
 @extends('layouts.app')
-
 @section('title', 'Загрузить трек')
-
 @section('content')
 <div class="max-w-2xl mx-auto px-6 py-10">
     <div class="mb-6">
@@ -10,12 +8,9 @@
         </a>
         <h1 class="text-3xl font-bold text-white mt-2">Загрузить новый трек</h1>
     </div>
-
     <div class="bg-main-dark border border-gray-800 p-8 rounded-3xl shadow-xl">
         <form action="{{ route('admin.tracks.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
             @csrf
-
-            
             <div>
                 <label for="title" class="block text-sm font-medium text-gray-300 mb-2">Название трека *</label>
                 <input type="text" id="title" name="title" value="{{ old('title') }}" required
@@ -23,8 +18,6 @@
                        placeholder="Например: The Only Thing They Fear Is You">
                 @error('title') <p class="text-red-400 text-xs mt-1">{{ $message }}</p> @enderror
             </div>
-
-            
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                     <label for="author_id" class="block text-sm font-medium text-gray-300 mb-2">Автор (композитор) *</label>
@@ -39,7 +32,6 @@
                     </select>
                     @error('author_id') <p class="text-red-400 text-xs mt-1">{{ $message }}</p> @enderror
                 </div>
-
                 <div>
                     <label for="album_id" class="block text-sm font-medium text-gray-300 mb-2">Альбом</label>
                     <select id="album_id" name="album_id" 
@@ -54,8 +46,6 @@
                     @error('album_id') <p class="text-red-400 text-xs mt-1">{{ $message }}</p> @enderror
                 </div>
             </div>
-
-            
             <div>
                 <label for="status_id" class="block text-sm font-medium text-gray-300 mb-2">Статус *</label>
                 <select id="status_id" name="status_id" required 
@@ -68,8 +58,6 @@
                 </select>
                 @error('status_id') <p class="text-red-400 text-xs mt-1">{{ $message }}</p> @enderror
             </div>
-
-            
             <div>
                 <label for="audio" class="block text-sm font-medium text-gray-300 mb-2">Аудиофайл *</label>
                 <input type="file" id="audio" name="audio" accept="audio/mp3, audio/wav, audio/ogg, audio/flac" required
@@ -77,8 +65,6 @@
                 <p class="text-xs text-gray-500 mt-1">Поддерживаемые форматы: MP3, WAV, FLAC, OGG (до 50 МБ).</p>
                 @error('audio') <p class="text-red-400 text-xs mt-1">{{ $message }}</p> @enderror
             </div>
-
-            
             <div class="flex items-center justify-end gap-4 pt-4 border-t border-gray-800">
                 <a href="{{ route('admin.tracks.index') }}" class="px-5 py-2.5 text-sm text-gray-400 hover:text-white transition-colors">
                     Отмена

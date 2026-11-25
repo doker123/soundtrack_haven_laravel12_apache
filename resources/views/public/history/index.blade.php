@@ -1,17 +1,11 @@
 @extends('layouts.app')
-
 @section('title', 'История прослушиваний')
-
 @section('content')
 <div class="max-w-5xl mx-auto px-6 py-10">
-
-    
     <div class="mb-8">
         <h1 class="text-3xl font-extrabold text-white">История прослушиваний</h1>
         <p class="text-sm text-gray-400 mt-1">Все треки, которые вы слушали</p>
     </div>
-
-    
     <div class="grid grid-cols-3 gap-4 mb-10">
         <div class="bg-main-dark border border-gray-800 rounded-2xl p-5 flex flex-col gap-1">
             <span class="text-3xl font-extrabold text-violet-400">{{ number_format($totalPlays) }}</span>
@@ -33,15 +27,12 @@
             <span class="text-sm text-gray-400">времени прослушано</span>
         </div>
     </div>
-
-    
     <div class="flex flex-col gap-2">
         @forelse($history as $entry)
             @php
                 $track = $entry->track;
                 $percent = $entry->listenedPercent();
             @endphp
-
             <div class="bg-main-dark border border-gray-800 hover:border-violet-500/40 rounded-2xl p-3 flex items-center gap-4 transition-colors group cursor-pointer"
                  data-track-id="{{ $track->id }}"
                  data-track-url="{{ route('tracks.stream', $track) }}"
@@ -49,15 +40,11 @@
                  data-track-author="{{ $track->author?->name ?? 'Неизвестный автор' }}"
                  data-track-cover="{{ $track->album?->cover_url ?? asset('images/default-cover.svg') }}"
                  data-track-duration="{{ $track->duration_ms ? (int)($track->duration_ms / 1000) : 0 }}">
-
-                
                 <div class="w-12 h-12 rounded-xl overflow-hidden bg-gray-900 shrink-0 border border-gray-700/60">
                     <img src="{{ $track->album?->cover_url ?? asset('images/default-cover.svg') }}"
                          alt="{{ $track->title }}"
                          class="w-full h-full object-cover">
                 </div>
-
-                
                 <div class="flex-1 min-w-0">
                     <h4 class="font-semibold text-white text-sm truncate group-hover:text-violet-300 transition-colors">
                         {{ $track->title }}
@@ -68,8 +55,6 @@
                             · <span class="text-gray-500">{{ $track->album->title }}</span>
                         @endif
                     </p>
-
-                    
                     <div class="mt-1.5 flex items-center gap-2">
                         <div class="flex-1 h-1 bg-gray-700 rounded-full overflow-hidden">
                             <div class="h-full bg-violet-500 rounded-full transition-all"
@@ -78,8 +63,6 @@
                         <span class="text-[10px] text-gray-500 shrink-0">{{ $percent }}%</span>
                     </div>
                 </div>
-
-                
                 <div class="shrink-0 text-right flex flex-col items-end gap-1">
                     <span class="text-xs font-mono text-gray-500">
                         {{ $track->duration_ms ? gmdate('i:s', (int)($track->duration_ms / 1000)) : '—' }}
@@ -105,13 +88,10 @@
             </div>
         @endforelse
     </div>
-
-    
     @if($history->hasPages())
         <div class="mt-8">
             {{ $history->links() }}
         </div>
     @endif
-
 </div>
 @endsection

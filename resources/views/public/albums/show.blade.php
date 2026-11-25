@@ -1,10 +1,7 @@
 @extends('layouts.app')
-
 @section('title', $album->title . ' — Soundtrack Haven')
-
 @section('content')
 <div class="max-w-7xl mx-auto px-6 py-8 flex flex-col gap-8">
-    
     <div class="flex flex-col md:flex-row items-center md:items-end gap-6 bg-main-dark border border-gray-800 rounded-3xl p-6">
         <img src="{{ $album->cover_url }}" alt="{{ $album->title }}" class="w-48 h-48 rounded-2xl object-cover shadow-2xl">
         <div class="flex flex-col gap-2">
@@ -25,8 +22,6 @@
             </button>
         </div>
     </div>
-
-    
     <div class="flex flex-col gap-2">
         @forelse($album->tracks as $index => $track)
             <div class="bg-main-dark border border-gray-800 hover:border-violet-500/40 rounded-2xl p-3 flex items-center justify-between transition-colors group cursor-pointer"
@@ -36,29 +31,24 @@
                  data-track-author="{{ $album->author?->name }}"
                  data-track-cover="{{ $album->cover_url }}"
                  data-track-duration="{{ $track->duration_ms ? (int)($track->duration_ms / 1000) : 0 }}">
-
                 <div class="flex items-center gap-4 min-w-0">
                     <span class="text-gray-500 w-6 text-center font-mono text-sm">{{ $index + 1 }}</span>
                     <span class="font-semibold text-white group-hover:text-violet-400 transition truncate">{{ $track->title }}</span>
                 </div>
-
                 <div class="flex items-center gap-3">
                     <span class="text-xs text-gray-500 font-mono">
                         {{ $track->duration_ms ? gmdate('i:s', (int)($track->duration_ms / 1000)) : '' }}
                     </span>
-
                     @auth
                         <form action="{{ route('public.favorites.toggle', $track) }}"
                               method="POST">
                             @csrf
-
                             <button type="submit"
                                     class="p-1.5 rounded-lg transition-colors
                                     {{ auth()->user()->favoriteTracks()->where('track_id', $track->id)->exists()
                                         ? 'text-red-500 hover:text-red-400'
                                         : 'text-gray-400 hover:text-red-400' }}"
                                     title="Добавить в избранное">
-
                                 <svg xmlns="http://www.w3.org/2000/svg"
                                      width="20"
                                      height="20"
@@ -68,14 +58,11 @@
                                      stroke-width="2"
                                      stroke-linecap="round"
                                      stroke-linejoin="round">
-
                                     <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-
                                 </svg>
                             </button>
                         </form>
                     @endauth
-                    
                     @auth
                         @if(auth()->user()->playlists->isNotEmpty())
                             <div class="relative group/menu">

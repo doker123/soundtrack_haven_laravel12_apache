@@ -1,11 +1,7 @@
 @extends('layouts.app')
-
 @section('title', 'Пользовательское соглашение — Soundtrack Haven')
-
 @section('content')
 <div class="max-w-4xl mx-auto px-6 py-12 flex flex-col gap-10">
-
-    
     <div class="border-b border-gray-800 pb-8 flex flex-col gap-3">
         <div class="inline-flex items-center gap-2 text-xs font-semibold text-violet-400 uppercase tracking-widest bg-violet-950/40 border border-violet-500/20 px-3 py-1 rounded-full w-fit">
             Юридическая информация
@@ -17,11 +13,7 @@
             Редакция действует с момента публикации. Пожалуйста, внимательно ознакомьтесь с условиями использования платформы Soundtrack Haven.
         </p>
     </div>
-
-    
     <div class="flex flex-col gap-6">
-
-        
         <section class="bg-main-dark border border-gray-800 rounded-2xl p-6 sm:p-7 flex flex-col gap-4 shadow-lg">
             <div class="flex items-center gap-3">
                 <span class="w-8 h-8 rounded-xl bg-violet-950/60 border border-violet-500/30 text-violet-400 text-sm font-bold flex items-center justify-center shrink-0">
@@ -35,8 +27,6 @@
                 <li>Пользователь несёт ответственность за соблюдение положений настоящего Соглашения, а также применимого законодательства своей страны.</li>
             </ul>
         </section>
-
-        
         <section class="bg-main-dark border border-gray-800 rounded-2xl p-6 sm:p-7 flex flex-col gap-4 shadow-lg">
             <div class="flex items-center gap-3">
                 <span class="w-8 h-8 rounded-xl bg-violet-950/60 border border-violet-500/30 text-violet-400 text-sm font-bold flex items-center justify-center shrink-0">
@@ -50,8 +40,6 @@
                 <li>Базовый доступ к возможностям Сайта предоставляется на безвозмездной основе.</li>
             </ul>
         </section>
-
-        
         <section class="bg-main-dark border border-gray-800 rounded-2xl p-6 sm:p-7 flex flex-col gap-4 shadow-lg">
             <div class="flex items-center gap-3">
                 <span class="w-8 h-8 rounded-xl bg-violet-950/60 border border-violet-500/30 text-violet-400 text-sm font-bold flex items-center justify-center shrink-0">
@@ -75,8 +63,6 @@
                 Пользователь несёт личную ответственность за сохранность данных своей учетной записи и любые действия, совершенные под его аккаунтом.
             </p>
         </section>
-
-        
         <section class="bg-main-dark border border-gray-800 rounded-2xl p-6 sm:p-7 flex flex-col gap-4 shadow-lg">
             <div class="flex items-center gap-3">
                 <span class="w-8 h-8 rounded-xl bg-violet-950/60 border border-violet-500/30 text-violet-400 text-sm font-bold flex items-center justify-center shrink-0">
@@ -90,8 +76,6 @@
                 <li>Администрация вправе вводить технические перерывы для проведения регламентных и профилактических работ.</li>
             </ul>
         </section>
-
-        
         <section class="bg-main-dark border border-gray-800 rounded-2xl p-6 sm:p-7 flex flex-col gap-4 shadow-lg">
             <div class="flex items-center gap-3">
                 <span class="w-8 h-8 rounded-xl bg-violet-950/60 border border-violet-500/30 text-violet-400 text-sm font-bold flex items-center justify-center shrink-0">
@@ -105,8 +89,6 @@
                 <li>Дизайн, программный код и элементы структуры интерфейса Soundtrack Haven охраняются авторским правом.</li>
             </ul>
         </section>
-
-        
         <section class="bg-main-dark border border-gray-800 rounded-2xl p-6 sm:p-7 flex flex-col gap-4 shadow-lg">
             <div class="flex items-center gap-3">
                 <span class="w-8 h-8 rounded-xl bg-violet-950/60 border border-violet-500/30 text-violet-400 text-sm font-bold flex items-center justify-center shrink-0">
@@ -119,8 +101,6 @@
                 <li>Администрация не несёт ответственности за возможные перебои в доступе, потерю пользовательских настроек или сторонние ссылки.</li>
             </ul>
         </section>
-
-        
         <section class="bg-main-dark border border-gray-800 rounded-2xl p-6 sm:p-7 flex flex-col gap-4 shadow-lg">
             <div class="flex items-center gap-3">
                 <span class="w-8 h-8 rounded-xl bg-violet-950/60 border border-violet-500/30 text-violet-400 text-sm font-bold flex items-center justify-center shrink-0">
@@ -133,16 +113,12 @@
                 <li>Признание отдельных пунктов настоящего документа недействительными не отменяет действие остальных его положений.</li>
             </ul>
         </section>
-
     </div>
-
-    
     <div class="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500 border-t border-gray-800/80">
         <span>© {{ date('Y') }} Soundtrack Haven. Все права защищены.</span>
         <a href="{{ route('home') }}" class="text-violet-400 hover:text-violet-300 font-semibold transition-colors flex items-center gap-1">
             <span>← Вернуться на главную</span>
         </a>
     </div>
-
 </div>
 @endsection

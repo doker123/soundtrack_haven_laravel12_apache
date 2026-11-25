@@ -1,10 +1,7 @@
 @extends('layouts.app')
-
 @section('title', 'Аккаунт заблокирован — Soundtrack Haven')
-
 @section('content')
 <div class="max-w-2xl mx-auto px-6 py-12 flex flex-col gap-8">
-    
     <div class="bg-main-dark border border-red-500/40 rounded-3xl p-6 md:p-8 flex flex-col gap-6 shadow-2xl">
         <div class="flex items-start gap-4">
             <div class="w-14 h-14 rounded-2xl bg-red-500/10 border border-red-500/30 flex items-center justify-center shrink-0 text-red-400">
@@ -17,8 +14,6 @@
                 <p class="text-xs text-red-300 mt-1">Ваш аккаунт был временно или навсегда заблокирован администрацией</p>
             </div>
         </div>
-
-        
         <div class="bg-main-light/30 border border-gray-800 rounded-2xl p-4 flex flex-col gap-3 text-sm">
             <div class="flex flex-col sm:flex-row sm:justify-between gap-1 border-b border-gray-800/80 pb-2">
                 <span class="text-gray-400">Пользователь:</span>
@@ -37,8 +32,6 @@
                 </p>
             </div>
         </div>
-
-        
         @if(session('status'))
             <div class="p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-2xl text-emerald-300 text-sm">
                 {{ session('status') }}
@@ -49,8 +42,6 @@
                 {{ session('error') }}
             </div>
         @endif
-
-        
         @if($latestAppeal && $latestAppeal->isPending())
             <div class="bg-amber-500/10 border border-amber-500/30 rounded-2xl p-5 flex flex-col gap-2">
                 <div class="flex items-center gap-2 text-amber-400 font-semibold text-sm">
@@ -68,7 +59,6 @@
                     {{ $latestAppeal->reason }}
                 </div>
             </div>
-        
         @elseif($latestAppeal && $latestAppeal->isRejected())
             <div class="bg-red-500/10 border border-red-500/30 rounded-2xl p-5 flex flex-col gap-2">
                 <div class="flex items-center gap-2 text-red-400 font-semibold text-sm">
@@ -88,8 +78,6 @@
                 </p>
             </div>
         @endif
-
-        
         @if(!$latestAppeal || !$latestAppeal->isPending())
             <form action="{{ route('public.ban.appeal') }}" method="POST" class="flex flex-col gap-6 pt-2">
                 @csrf
@@ -106,14 +94,12 @@
                         <span class="text-xs text-red-400 mt-2 block">{{ $message }}</span>
                     @enderror
                 </div>
-
                 <div class="flex items-center justify-between gap-4 pt-3">
                     <a href="#"
                        onclick="event.preventDefault(); document.getElementById('banned-logout-form').submit();"
                        class="text-xs text-gray-400 hover:text-white transition">
                         Выйти из аккаунта
                     </a>
-
                     <button type="submit"
                             class="px-5 py-2.5 bg-violet-600 hover:bg-violet-700 text-white font-semibold text-sm rounded-xl shadow-lg transition">
                         Отправить апелляцию
@@ -129,7 +115,6 @@
                 </a>
             </div>
         @endif
-
         <form id="banned-logout-form" action="{{ route('public.logout') }}" method="POST" class="hidden">
             @csrf
         </form>

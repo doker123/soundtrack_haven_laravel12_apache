@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\TrackController;
 use App\Http\Controllers\Admin\AlbumController as AdminAlbumController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\BanAppealController as AdminBanAppealController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -128,6 +129,7 @@ Route::prefix("admin")
     ->name("admin.")
     ->middleware(["auth", "admin"])
     ->group(function () {
+        Route::get("/", [AdminDashboardController::class, "index"])->name("dashboard");
         Route::resource("tracks", TrackController::class);
         Route::resource("authors", AuthorController::class);
         Route::resource("albums", AdminAlbumController::class);

@@ -1,17 +1,12 @@
 @extends('layouts.app')
-
 @section('title', 'Заявки на разбан — Админ-панель')
-
 @section('content')
 <div class="max-w-7xl mx-auto px-6 py-8 flex flex-col gap-8">
-    
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
             <h1 class="text-3xl font-extrabold text-white">Заявки на разбан</h1>
             <p class="text-sm text-gray-400 mt-1">Рассмотрение и обработка апелляций заблокированных пользователей</p>
         </div>
-
-        
         <div class="flex items-center gap-2 bg-main-dark p-1.5 rounded-2xl border border-gray-800 self-start md:self-auto">
             <a href="{{ route('admin.appeals.index', ['status' => 'pending']) }}"
                class="px-4 py-2 rounded-xl text-xs font-semibold transition flex items-center gap-2 {{ $status === 'pending' ? 'bg-violet-600 text-white shadow-lg' : 'text-gray-400 hover:text-white' }}">
@@ -38,8 +33,6 @@
             </a>
         </div>
     </div>
-
-    
     @if(session('success'))
         <div class="p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-2xl text-emerald-300 text-sm">
             {{ session('success') }}
@@ -50,12 +43,9 @@
             {{ session('error') }}
         </div>
     @endif
-
-    
     <div class="flex flex-col gap-4">
         @forelse($appeals as $appeal)
             <div class="bg-main-dark border border-gray-800 rounded-3xl p-6 flex flex-col gap-5 hover:border-gray-700 transition">
-                
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-800/80 pb-4">
                     <div class="flex items-center gap-3.5">
                         <div class="w-11 h-11 rounded-xl bg-gray-900 border border-gray-700 overflow-hidden shrink-0">
@@ -73,8 +63,6 @@
                             <span class="text-[11px] text-gray-500">Подано: {{ $appeal->created_at->format('d.m.Y H:i') }} ({{ $appeal->created_at->diffForHumans() }})</span>
                         </div>
                     </div>
-
-                    
                     <div>
                         @if($appeal->isPending())
                             <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-500/10 border border-amber-500/30 text-amber-300 rounded-xl text-xs font-semibold">
@@ -92,10 +80,7 @@
                         @endif
                     </div>
                 </div>
-
-                
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-                    
                     <div class="bg-main-light/30 border border-gray-800/80 rounded-2xl p-4 flex flex-col gap-2">
                         <span class="text-gray-400 font-semibold uppercase tracking-wider text-[10px]">Информация о блокировке</span>
                         <div class="text-gray-300 flex flex-col gap-1 mt-1">
@@ -113,8 +98,6 @@
                             </div>
                         </div>
                     </div>
-
-                    
                     <div class="bg-main-light/30 border border-gray-800/80 rounded-2xl p-4 flex flex-col gap-2">
                         <span class="text-violet-400 font-semibold uppercase tracking-wider text-[10px]">Заявление пользователя</span>
                         <div class="mt-1">
@@ -122,8 +105,6 @@
                                 {{ $appeal->reason }}
                             </p>
                         </div>
-
-                        
                         @if(!$appeal->isPending())
                             <div class="mt-auto pt-2 border-t border-gray-800 text-[11px] text-gray-400 flex flex-col gap-1">
                                 <div><span class="text-gray-500">Рассмотрел:</span> {{ $appeal->reviewedBy?->name ?? 'Модератор' }} ({{ $appeal->reviewed_at?->format('d.m.Y H:i') }})</div>
@@ -134,11 +115,8 @@
                         @endif
                     </div>
                 </div>
-
-                
                 @if($appeal->isPending())
                     <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-end gap-3 pt-2 border-t border-gray-800/80">
-                        
                         <form action="{{ route('admin.appeals.reject', $appeal) }}" method="POST" class="inline flex-1 sm:flex-initial">
                             @csrf
                             <input type="hidden" name="admin_comment" value="В разбане отказано после рассмотрения апелляции.">
@@ -147,8 +125,6 @@
                                 Отклонить
                             </button>
                         </form>
-
-                        
                         <form action="{{ route('admin.appeals.approve', $appeal) }}" method="POST" class="inline flex-1 sm:flex-initial">
                             @csrf
                             <input type="hidden" name="admin_comment" value="Апелляция принята. Ограничения с аккаунта сняты.">
@@ -166,8 +142,6 @@
             </div>
         @endforelse
     </div>
-
-    
     @if($appeals->hasPages())
         <div class="mt-4">
             {{ $appeals->links() }}

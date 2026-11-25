@@ -1,11 +1,7 @@
 @extends('layouts.app')
-
 @section('title', 'Поиск по каталогу — Soundtrack Haven')
-
 @section('content')
 <div class="max-w-7xl mx-auto px-6 py-10 flex flex-col gap-8">
-
-    
     <div class="flex flex-col gap-4">
         <h1 class="text-3xl font-extrabold text-white">Поиск</h1>
         <form action="{{ route('search') }}" method="GET" class="relative max-w-2xl">
@@ -25,16 +21,13 @@
                 Найти
             </button>
         </form>
-
         @if($query !== '')
             <p class="text-xs text-gray-400">
                 Результаты поиска по запросу «<span class="text-white font-medium">{{ $query }}</span>»: найдено {{ $counts['total'] }}
             </p>
         @endif
     </div>
-
     @if($query !== '' && mb_strlen($query) >= 2)
-        
         <div class="flex items-center gap-2 overflow-x-auto pb-2 border-b border-gray-800 text-sm font-medium">
             <a href="{{ route('search', ['q' => $query, 'type' => 'all']) }}"
                class="px-4 py-2 rounded-xl transition-all whitespace-nowrap flex items-center gap-2 {{ $type === 'all' ? 'bg-violet-600 text-white shadow-md' : 'bg-main-dark text-gray-400 hover:text-white hover:bg-gray-800' }}">
@@ -43,7 +36,6 @@
                     {{ $counts['total'] }}
                 </span>
             </a>
-
             <a href="{{ route('search', ['q' => $query, 'type' => 'tracks']) }}"
                class="px-4 py-2 rounded-xl transition-all whitespace-nowrap flex items-center gap-2 {{ $type === 'tracks' ? 'bg-violet-600 text-white shadow-md' : 'bg-main-dark text-gray-400 hover:text-white hover:bg-gray-800' }}">
                 <span>Треки</span>
@@ -51,7 +43,6 @@
                     {{ $counts['tracks'] }}
                 </span>
             </a>
-
             <a href="{{ route('search', ['q' => $query, 'type' => 'albums']) }}"
                class="px-4 py-2 rounded-xl transition-all whitespace-nowrap flex items-center gap-2 {{ $type === 'albums' ? 'bg-violet-600 text-white shadow-md' : 'bg-main-dark text-gray-400 hover:text-white hover:bg-gray-800' }}">
                 <span>Альбомы</span>
@@ -59,7 +50,6 @@
                     {{ $counts['albums'] }}
                 </span>
             </a>
-
             <a href="{{ route('search', ['q' => $query, 'type' => 'authors']) }}"
                class="px-4 py-2 rounded-xl transition-all whitespace-nowrap flex items-center gap-2 {{ $type === 'authors' ? 'bg-violet-600 text-white shadow-md' : 'bg-main-dark text-gray-400 hover:text-white hover:bg-gray-800' }}">
                 <span>Авторы</span>
@@ -67,7 +57,6 @@
                     {{ $counts['authors'] }}
                 </span>
             </a>
-
             <a href="{{ route('search', ['q' => $query, 'type' => 'playlists']) }}"
                class="px-4 py-2 rounded-xl transition-all whitespace-nowrap flex items-center gap-2 {{ $type === 'playlists' ? 'bg-violet-600 text-white shadow-md' : 'bg-main-dark text-gray-400 hover:text-white hover:bg-gray-800' }}">
                 <span>Плейлисты</span>
@@ -77,9 +66,7 @@
             </a>
         </div>
     @endif
-
     @if($query === '' || mb_strlen($query) < 2)
-        
         <div class="py-16 text-center text-gray-500 bg-main-dark border border-gray-800 rounded-3xl flex flex-col items-center">
             <div class="w-16 h-16 rounded-2xl bg-gray-900 border border-gray-800 flex items-center justify-center text-gray-400 mb-4">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -90,7 +77,6 @@
             <p class="text-xs text-gray-600 mt-1">Ищите музыку, авторов, саундтреки к играм и плейлисты</p>
         </div>
     @elseif($counts['total'] === 0)
-        
         <div class="py-16 text-center text-gray-500 bg-main-dark border border-gray-800 rounded-3xl flex flex-col items-center">
             <div class="w-16 h-16 rounded-2xl bg-gray-900 border border-gray-800 flex items-center justify-center text-gray-400 mb-4">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -101,8 +87,6 @@
             <p class="text-xs text-gray-600 mt-1">Попробуйте изменить формулировку запроса или поискать другое имя</p>
         </div>
     @else
-
-        
         @if(($type === 'all' || $type === 'tracks') && $tracks->isNotEmpty())
             <section class="flex flex-col gap-4">
                 <div class="flex items-center justify-between">
@@ -117,7 +101,6 @@
                         </a>
                     @endif
                 </div>
-
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                     @foreach($tracks as $track)
                         <div class="bg-main-dark border border-gray-800 hover:border-violet-500/40 rounded-2xl p-3 flex items-center justify-between transition-colors group cursor-pointer"
@@ -127,7 +110,6 @@
                              data-track-author="{{ $track->author?->name ?? 'Неизвестный автор' }}"
                              data-track-cover="{{ $track->album?->cover_url ?? asset('images/default-cover.svg') }}"
                              data-track-duration="{{ $track->duration_ms ? (int)($track->duration_ms / 1000) : 0 }}">
-                            
                             <div class="flex items-center gap-3.5 min-w-0">
                                 <div class="w-12 h-12 rounded-xl overflow-hidden bg-gray-900 shrink-0 border border-gray-700/60">
                                     <img src="{{ $track->album?->cover_url ?? asset('images/default-cover.svg') }}"
@@ -143,7 +125,6 @@
                                     </p>
                                 </div>
                             </div>
-
                             <div class="flex items-center gap-2 pl-2 shrink-0">
                                 <span class="text-xs font-mono text-gray-500">
                                     {{ $track->duration_ms ? gmdate('i:s', (int)($track->duration_ms / 1000)) : '' }}
@@ -152,7 +133,6 @@
                         </div>
                     @endforeach
                 </div>
-
                 @if($type === 'tracks' && method_exists($tracks, 'hasPages') && $tracks->hasPages())
                     <div class="mt-4">
                         {{ $tracks->links() }}
@@ -160,8 +140,6 @@
                 @endif
             </section>
         @endif
-
-        
         @if(($type === 'all' || $type === 'albums') && $albums->isNotEmpty())
             <section class="flex flex-col gap-4">
                 <div class="flex items-center justify-between">
@@ -176,7 +154,6 @@
                         </a>
                     @endif
                 </div>
-
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
                     @foreach($albums as $album)
                         <a href="{{ route('public.albums.show', $album) }}">
@@ -199,7 +176,6 @@
                         </a>
                     @endforeach
                 </div>
-
                 @if($type === 'albums' && method_exists($albums, 'hasPages') && $albums->hasPages())
                     <div class="mt-4">
                         {{ $albums->links() }}
@@ -207,8 +183,6 @@
                 @endif
             </section>
         @endif
-
-        
         @if(($type === 'all' || $type === 'authors') && $authors->isNotEmpty())
             <section class="flex flex-col gap-4">
                 <div class="flex items-center justify-between">
@@ -223,7 +197,6 @@
                         </a>
                     @endif
                 </div>
-
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-5">
                     @foreach($authors as $author)
                         <a href="{{ route('public.authors.show', $author) }}">
@@ -243,7 +216,6 @@
                         </a>
                     @endforeach
                 </div>
-
                 @if($type === 'authors' && method_exists($authors, 'hasPages') && $authors->hasPages())
                     <div class="mt-4">
                         {{ $authors->links() }}
@@ -251,8 +223,6 @@
                 @endif
             </section>
         @endif
-
-        
         @if(($type === 'all' || $type === 'playlists') && $playlists->isNotEmpty())
             <section class="flex flex-col gap-4">
                 <div class="flex items-center justify-between">
@@ -267,7 +237,6 @@
                         </a>
                     @endif
                 </div>
-
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
                     @foreach($playlists as $playlist)
                         <a href="{{ route('public.playlists.show', $playlist) }}">
@@ -291,7 +260,6 @@
                         </a>
                     @endforeach
                 </div>
-
                 @if($type === 'playlists' && method_exists($playlists, 'hasPages') && $playlists->hasPages())
                     <div class="mt-4">
                         {{ $playlists->links() }}
@@ -299,8 +267,6 @@
                 @endif
             </section>
         @endif
-
     @endif
-
 </div>
 @endsection

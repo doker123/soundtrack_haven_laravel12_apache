@@ -9,7 +9,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="icon" href="{{ asset('images/favicon/favicon.svg') }}">
 </head>
-<body class="bg-main-bg text-slate-100 antialised font-main min-h-screen flex flex-col">
+<body class="bg-main-bg text-slate-100 antialised font-main flex flex-col">
     @include('modules.header')
     <div class="flex-1 flex flex-col">
         <main class="flex-1">
@@ -18,6 +18,5 @@
         @include('modules.footer')
     </div>
     @include('modules.player')
-    @stack('scripts')
 </body>
 </html>

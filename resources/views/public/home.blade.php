@@ -1,10 +1,7 @@
 @extends('layouts.app')
-
 @section('title', 'Soundtrack Haven — Главная')
-
 @section('content')
 <div class="max-w-7xl mx-auto px-6 py-8 flex flex-col gap-14">
-    
     <section class="flex flex-col gap-6">
         <div class="flex justify-between items-end">
             <div>
@@ -12,7 +9,6 @@
                 <p class="text-xs md:text-sm text-gray-400 mt-1">Свежие игровые оригинальные сборники</p>
             </div>
         </div>
-
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
             @forelse($latestAlbums as $album)
                 <a href="{{route('public.albums.show', $album)}}">
@@ -22,15 +18,12 @@
                                  alt="{{ $album->title }}"
                                  class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
                         </div>
-
                         <h3 class="font-bold text-white text-sm truncate" title="{{ $album->title }}">
                             {{ $album->title }}
                         </h3>
-
                         <p class="text-xs text-gray-400 mt-1 truncate">
                             {{ $album->author?->name ?? 'Неизвестный автор' }}
                         </p>
-
                         <div class="mt-auto pt-3 flex items-center justify-between text-[11px] text-gray-500">
                             <span>{{ $album->release_date?->format('Y') ?? '—' }}</span>
                             <span>{{ $album->tracks->count() }} треков</span>
@@ -44,14 +37,11 @@
             @endforelse
         </div>
     </section>
-
-    
     <section id="featured-tracks" class="flex flex-col gap-6">
         <div>
             <h2 class="text-2xl md:text-3xl font-extrabold text-white">Треки, которые стоит послушать</h2>
             <p class="text-xs md:text-sm text-gray-400 mt-1">Популярные композиции из игровых миров</p>
         </div>
-
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
             @forelse($featuredTracks as $index => $track)
                 <div class="bg-main-dark border border-gray-800 hover:border-violet-500/40 rounded-2xl p-3 flex items-center justify-between transition-colors group cursor-pointer"
@@ -62,13 +52,11 @@
                         data-track-cover="{{ $track->album?->cover_url ?? asset('images/default-cover.svg') }}"
                         data-track-duration="{{ $track->duration_ms ? (int)($track->duration_ms / 1000) : 0 }}">
                     <div class="flex items-center gap-3.5 min-w-0">
-                        
                         <div class="w-12 h-12 rounded-xl overflow-hidden bg-gray-900 shrink-0 border border-gray-700/60">
                             <img src="{{ $track->album?->cover_url ?? asset('images/default-cover.svg') }}"
                                  alt="{{ $track->title }}"
                                  class="w-full h-full object-cover">
                         </div>
-
                         <div class="min-w-0">
                             <h4 class="font-semibold text-white text-sm truncate group-hover:text-violet-300 transition-colors">
                                 {{ $track->title }}
@@ -78,24 +66,20 @@
                             </p>
                         </div>
                     </div>
-
                     <div class="flex items-center gap-2 pl-2 shrink-0">
                         <span class="text-xs font-mono text-gray-500">
                             {{ $track->duration_ms ? gmdate('i:s', (int)($track->duration_ms / 1000)) : '' }}
                         </span>
-
                         @auth
                             <form action="{{ route('public.favorites.toggle', $track) }}"
                                   method="POST">
                                 @csrf
-
                                 <button type="submit"
                                         class="p-1.5 rounded-lg transition-colors
                                         {{ auth()->user()->favoriteTracks()->where('track_id', $track->id)->exists()
                                             ? 'text-red-500 hover:text-red-400'
                                             : 'text-gray-400 hover:text-red-400' }}"
                                         title="Добавить в избранное">
-
                                     <svg xmlns="http://www.w3.org/2000/svg"
                                          width="20"
                                          height="20"
@@ -105,15 +89,11 @@
                                          stroke-width="2"
                                          stroke-linecap="round"
                                          stroke-linejoin="round">
-
                                         <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-
                                     </svg>
                                 </button>
                             </form>
                         @endauth
-
-                        
                         @auth
                             @if(auth()->user()->playlists->isNotEmpty())
                                 <div class="relative playlist-menu-container">
@@ -149,14 +129,11 @@
             @endforelse
         </div>
     </section>
-
-    
     <section class="flex flex-col gap-6">
         <div>
             <h2 class="text-2xl md:text-3xl font-extrabold text-white">Легендарные авторы</h2>
             <p class="text-xs md:text-sm text-gray-400 mt-1">Композиторы, создавшие звук великих игр</p>
         </div>
-
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
             @forelse($popularAuthors as $author)
                 <a href="{{route('public.authors.show', $author)}}">
@@ -166,11 +143,9 @@
                                  alt="{{ $author->name }}"
                                  class="w-full h-full object-cover">
                         </div>
-
                         <h3 class="font-bold text-white text-sm truncate max-w-full">
                             {{ $author->name }}
                         </h3>
-
                         <p class="text-[11px] text-gray-400 mt-1">
                             {{ $author->albums_count }} альбомов · {{ $author->tracks_count }} треков
                         </p>

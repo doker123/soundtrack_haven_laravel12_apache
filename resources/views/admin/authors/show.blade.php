@@ -1,7 +1,5 @@
 @extends('layouts.app')
-
 @section('title', $author->name)
-
 @section('content')
 <div class="max-w-6xl mx-auto px-6 py-10">
     <div class="flex items-center justify-between mb-6">
@@ -21,12 +19,9 @@
             </form>
         </div>
     </div>
-
-    
     <div class="flex flex-col sm:flex-row gap-8 items-center sm:items-start bg-main-dark border border-gray-800 p-8 rounded-3xl mb-10 shadow-xl">
         <img src="{{ $author->image_url }}" alt="{{ $author->name }}"
             class="w-32 h-32 rounded-full object-cover border-4 border-violet-900 bg-gray-900 shrink-0 shadow-lg">
-
         <div class="flex-1 text-center sm:text-left">
             <h1 class="text-3xl font-extrabold text-white mb-2">{{ $author->name }}</h1>
             <div class="flex items-center justify-center sm:justify-start gap-4 text-xs text-gray-400 mb-4">
@@ -39,15 +34,12 @@
             @endif
         </div>
     </div>
-
-    
     <div class="flex justify-between items-center mb-6">
         <h2 class="text-2xl font-bold text-white">Альбомы автора</h2>
         <a href="{{ route('admin.albums.create') }}?author_id={{ $author->id }}" class="text-xs text-violet-400 hover:underline">
             + Создать альбом для этого автора
         </a>
     </div>
-
     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
         @forelse($author->albums as $album)
             <div class="bg-main-dark border border-gray-800 rounded-2xl p-4 flex flex-col hover:border-violet-500/40 transition-all group">

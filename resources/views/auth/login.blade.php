@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title', 'Форма авторизации')
 @section('content')
-<div class='form-auth flex-1 flex items-center justify-center pt-12'>
+<div class='form-auth flex-1 flex items-center justify-center pt-12 pb-12'>
     <form class='flex flex-col gap-5' method="post" action="{{ url('/login') }}">
         @csrf
         <label for="email"></label>

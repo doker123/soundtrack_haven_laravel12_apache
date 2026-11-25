@@ -1,14 +1,10 @@
 @extends('layouts.app')
-
 @section('title', $playlist->title)
-
 @section('content')
 <div class="max-w-6xl mx-auto px-6 py-10">
     <a href="{{ route('public.playlists.index') }}" class="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-white mb-6">
         ← К моим плейлистам
     </a>
-
-    
     <div class="flex flex-col md:flex-row gap-8 items-start bg-main-dark border border-gray-800 p-8 rounded-3xl mb-8 shadow-xl">
         <img src="{{ $playlist->cover_url }}" alt="{{ $playlist->title }}" class="w-52 h-52 object-cover rounded-2xl shadow-xl shrink-0 border border-gray-700 bg-gray-900">
         <div class="flex-1">
@@ -17,11 +13,9 @@
             </span>
             <h1 class="text-3xl font-extrabold text-white mb-2">{{ $playlist->title }}</h1>
             <p class="text-gray-400 text-sm mb-4">Создатель: {{ $playlist->user->name }} · {{ $playlist->tracks->count() }} треков</p>
-
             @if($playlist->description)
                 <p class="text-sm text-gray-300 leading-relaxed mb-6">{{ $playlist->description }}</p>
             @endif
-
             @can('update', $playlist)
                 <div class="flex items-center gap-3">
                     <a href="{{ route('public.playlists.edit', $playlist) }}" class="text-xs bg-yellow-500/10 text-yellow-400 hover:bg-yellow-500/20 px-4 py-2 rounded-xl border border-yellow-500/30">
@@ -38,8 +32,6 @@
             @endcan
         </div>
     </div>
-
-    
     <div class="bg-main-dark border border-gray-800 rounded-3xl overflow-hidden shadow-xl">
         <div class="divide-y divide-gray-800/80">
             @forelse($playlist->tracks as $index => $track)
@@ -58,7 +50,6 @@
                     <div class="col-span-2 text-gray-500 text-xs font-mono text-center">
                         {{ $track->duration_ms ? gmdate('i:s', (int)($track->duration_ms / 1000)) : '—' }}
                     </div>
-
                     @can('update', $playlist)
                         <div class="col-span-1 text-right" onclick="event.stopPropagation()">
                             <form action="{{ route('public.playlists.tracks.remove', [$playlist, $track]) }}" method="POST">

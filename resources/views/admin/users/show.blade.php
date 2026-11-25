@@ -1,11 +1,7 @@
 @extends('layouts.app')
-
 @section('title', "Пользователь: {$user->name}")
-
 @section('content')
 <div class="max-w-7xl mx-auto px-6 py-10">
-
-    
     <div class="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-3 items-center mb-8">
         <div>
             <div class="flex items-center gap-2 text-xs text-violet-400 font-semibold uppercase tracking-wider mb-1">
@@ -25,8 +21,6 @@
             ← К списку
         </a>
     </div>
-
-    
     @if(session('success'))
         <div class="mb-6 p-4 rounded-xl bg-emerald-950/60 border border-emerald-500/40 text-emerald-300 text-sm">
             {{ session('success') }}
@@ -37,25 +31,17 @@
             {{ session('error') }}
         </div>
     @endif
-
-    
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-
-        
         <aside class="lg:col-span-4 space-y-6 lg:sticky lg:top-6">
-
-            
             <div class="bg-main-dark border border-gray-800 rounded-3xl p-6 shadow-xl
                         grid grid-cols-[auto_1fr] gap-4 items-center">
                 <img src="{{ $user->avatar?->url ?? asset('images/default-avatar.svg') }}"
                      alt="{{ $user->name }}"
                      class="w-16 h-16 rounded-full object-cover border border-gray-700 bg-gray-900">
-
                 <div class="min-w-0">
                     <div class="font-semibold text-white truncate">{{ $user->name }}</div>
                     <div class="text-sm text-gray-400 truncate">{{ $user->email }}</div>
                 </div>
-
                 <div class="col-span-2 grid grid-cols-2 gap-4 pt-4 border-t border-gray-800 text-sm">
                     <div>
                         <div class="text-xs text-gray-500 uppercase tracking-wider mb-1">Роль</div>
@@ -74,12 +60,9 @@
                     </div>
                 </div>
             </div>
-
-            
             @php $activeBan = $user->activeBan(); @endphp
             <div class="bg-main-dark border border-gray-800 rounded-3xl p-6 shadow-xl">
                 <h2 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Статус аккаунта</h2>
-
                 @if($activeBan)
                     <div class="rounded-2xl bg-red-950/40 border border-red-500/40 p-4 text-sm space-y-2">
                         <div class="flex items-center gap-2 text-red-300 font-semibold">
@@ -105,8 +88,6 @@
                             Выдан: {{ $activeBan->created_at?->format('d.m.Y H:i') }}
                         </div>
                     </div>
-
-                    
                     <form action="{{ route('admin.users.unban', $user) }}" method="POST"
                           class="mt-4">
                         @csrf
@@ -125,8 +106,6 @@
                     </div>
                 @endif
             </div>
-
-            
             <div class="bg-main-dark border border-red-500/30 rounded-3xl p-6 shadow-xl">
                 <h2 class="text-xs font-semibold text-red-400 uppercase tracking-wider mb-3">Опасная зона</h2>
                 <form action="{{ route('admin.users.destroy', $user) }}" method="POST">
@@ -140,18 +119,13 @@
                 </form>
             </div>
         </aside>
-
-        
         <main class="lg:col-span-8 space-y-6">
-
-            
             <div class="bg-main-dark border border-gray-800 rounded-3xl p-6 shadow-xl">
                 <h2 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Изменение роли</h2>
                 <form action="{{ route('admin.users.update', $user) }}" method="POST"
                       class="grid grid-cols-1 sm:grid-cols-[1fr_auto] gap-3 items-start">
                     @csrf
                     @method('PUT')
-
                     <div>
                         <select name="role_id"
                                 class="w-full bg-main-light/40 border border-gray-700 rounded-xl px-3 py-2.5
@@ -166,7 +140,6 @@
                             <div class="text-sm text-red-400 mt-1.5">{{ $message }}</div>
                         @enderror
                     </div>
-
                     <button type="submit"
                             class="bg-[#6d5898] hover:bg-[#5825b5] text-white text-sm font-semibold
                                    px-5 py-2.5 rounded-xl transition-all shadow-lg cursor-pointer">
@@ -174,15 +147,12 @@
                     </button>
                 </form>
             </div>
-
-            
             @if(! $activeBan)
                 <div class="bg-main-dark border border-gray-800 rounded-3xl p-6 shadow-xl">
                     <h2 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Заблокировать пользователя</h2>
                     <form action="{{ route('admin.users.ban', $user) }}" method="POST"
                           class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         @csrf
-
                         <div class="sm:col-span-2">
                             <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1.5">
                                 Причина бана *
@@ -196,7 +166,6 @@
                                 <div class="text-sm text-red-400 mt-1.5">{{ $message }}</div>
                             @enderror
                         </div>
-
                         <div>
                             <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1.5">
                                 Срок бана (оставьте пустым для бессрочного)
@@ -209,7 +178,6 @@
                                 <div class="text-sm text-red-400 mt-1.5">{{ $message }}</div>
                             @enderror
                         </div>
-
                         <div class="flex items-end">
                             <button type="submit"
                                     class="w-full bg-red-600 hover:bg-red-500 text-white text-sm font-semibold
@@ -220,8 +188,6 @@
                     </form>
                 </div>
             @endif
-
-            
             @if($user->bans->isNotEmpty())
                 <div class="bg-main-dark border border-gray-800 rounded-3xl p-6 shadow-xl">
                     <h2 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">История банов</h2>
