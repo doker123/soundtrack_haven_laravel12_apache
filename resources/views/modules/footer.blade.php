@@ -13,7 +13,6 @@
                 <h4 class="text-xs font-semibold text-white uppercase tracking-wider">Каталог</h4>
                 <ul class="flex flex-col gap-2 text-xs">
                     <li><a href="{{ route('home') }}" class="text-white hover:text-violet-400 transition-colors">Главная страница</a></li>
-                    <li><a href="{{ route('search') }}" class="text-white hover:text-violet-400 transition-colors">Поиск музыки</a></li>
                     <li><a href="{{ route('home') }}#featured-tracks" class="text-white hover:text-violet-400 transition-colors">Популярные треки</a></li>
                 </ul>
             </div>

@@ -33,10 +33,10 @@
                 </div>
             </div>
         @endcan
-        <a href="{{ route('search') }}" class="hover:text-[#6d5898] active:text-[#5825b5] transition-colors uppercase tracking-wider">
+        @auth
+        <a href="{{ route('public.search') }}" class="hover:text-[#6d5898] active:text-[#5825b5] transition-colors uppercase tracking-wider">
             Поиск
         </a>
-        @auth
         <a href="{{route('public.favorites.index')}}" class="hover:text-[#6d5898] active:text-[#5825b5] transition-colors uppercase tracking-wider">
             Избранное
         </a>

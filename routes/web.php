@@ -22,7 +22,6 @@ use App\Http\Controllers\Public\SearchController;
 
 // Общедоступные страницы
 Route::get("/", [HomeController::class, "index"])->name("home");
-Route::get("/search", [SearchController::class, "index"])->name("search");
 Route::get("/tracks/{track}/stream", [
     AudioStreamController::class,
     "stream",
@@ -50,6 +49,7 @@ Route::prefix("public")
     ->name("public.")
     ->middleware("auth")
     ->group(function () {
+        Route::get("/search", [SearchController::class, "index"])->name("search");
         Route::get("/favorites", [FavoriteController::class, "index"])->name(
             "favorites.index",
         );
